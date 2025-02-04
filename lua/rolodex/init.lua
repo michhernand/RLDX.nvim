@@ -24,7 +24,7 @@ function M.eval_char(i, char, prev_char, prefix, start)
 	-- Required One of:
 	--	- char is space (char == " ")
         elseif (start ~= nil) and (char == " ") then
-            finish = i - 1
+            finish = i
         end
 
 	return start, finish
