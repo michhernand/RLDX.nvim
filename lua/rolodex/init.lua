@@ -86,6 +86,20 @@ function M.is_on_target(line, prefix, pos)
 end
 
 function M.autocomplete_handler()
+	-- Get the current line and cursor position
+	local line = vim.api.nvim_get_current_line()
+	local pos = vim.api.nvim_win_get_cursor(0)[2] + 1
+
+	starts, finishes = M.get_words(line, "!")
+	vim.notify("pos: " .. pos)
+	vim.notify("starts: " .. table.concat(starts, ", "))
+	vim.notify("finishes: " .. table.concat(finishes, ", "))
+
+	on_target = M.is_on_target(line, "!", pos)
+	if on_target then
+		vim.notify("ON TARGET!")
+	end
+	return word
 end
 
 return M
