@@ -57,7 +57,7 @@ describe("Eval Char", function()
 		local start = 1
 		local start, finish = rolodex.eval_char(ix, char, prev_char, prefix, start)
 		assert.are.equal(start, 1)
-		assert.are.equal(finish, 3)
+		assert.are.equal(finish, 4)
 	end)
 
 	it("can find end in the middle of the line", function()
@@ -67,7 +67,7 @@ describe("Eval Char", function()
 		local start = 5
 		local start, finish = rolodex.eval_char(ix, char, prev_char, prefix, start)
 		assert.are.equal(start, 5)
-		assert.are.equal(finish, 7)
+		assert.are.equal(finish, 8)
 	end)
 
 	it("cannot find end at the end of the line", function()
@@ -88,13 +88,13 @@ describe("Get Words", function()
 		assert.are.equal(#finishes, 3)
 
 		assert.are.equal(starts[1], 1)
-		assert.are.equal(finishes[1], 3)
+		assert.are.equal(finishes[1], 4)
 
 		assert.are.equal(starts[2], 5)
-		assert.are.equal(finishes[2], 7)
+		assert.are.equal(finishes[2], 8)
 
 		assert.are.equal(starts[3], 9)
-		assert.are.equal(finishes[3], 14)
+		assert.are.equal(finishes[3], 15)
 
 		assert.are.equal(starts[4], 16)
 	end)
@@ -105,16 +105,16 @@ describe("Get Words", function()
 		assert.are.equal(#finishes, 4)
 
 		assert.are.equal(starts[1], 1)
-		assert.are.equal(finishes[1], 4)
+		assert.are.equal(finishes[1], 5)
 
 		assert.are.equal(starts[2], 6)
-		assert.are.equal(finishes[2], 9)
+		assert.are.equal(finishes[2], 10)
 
 		assert.are.equal(starts[3], 11)
-		assert.are.equal(finishes[3], 17)
+		assert.are.equal(finishes[3], 18)
 
 		assert.are.equal(starts[4], 22)
-		assert.are.equal(finishes[4], 28)
+		assert.are.equal(finishes[4], 29)
 	end)
 
 	it("is at multiple words (line4)", function()
@@ -123,10 +123,10 @@ describe("Get Words", function()
 		assert.are.equal(#finishes, 2)
 
 		assert.are.equal(starts[1], 8)
-		assert.are.equal(finishes[1], 17)
+		assert.are.equal(finishes[1], 18)
 
 		assert.are.equal(starts[2], 19)
-		assert.are.equal(finishes[2], 22)
+		assert.are.equal(finishes[2], 23)
 
 		assert.are.equal(starts[3], 32)
 	end)
