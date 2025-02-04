@@ -59,6 +59,32 @@ function M.get_words(line, prefix)
 	return starts, finishes
 end
 
+function M.is_on_target(line, prefix, pos)
+	starts, finishes = M.get_words(line, prefix)
+	if #starts < #finishes then
+		error("finishes list cannot be longer than starts list")
+	end
+
+	for i = 1, math.max(#starts, #finishes) do
+		start_ok = true
+		if pos < starts[i] then
+			start_ok = false
+		end
+
+		finish_ok = true
+		if i <= #finishes then
+			if pos > finishes[i] then
+				finish_ok = false
+			end
+		end
+
+		if start_ok and finish_ok then
+			return true
+		end
+	end
+	return false
+end
+
 function M.autocomplete_handler()
     -- Get the current line and cursor position
     local line = vim.api.nvim_get_current_line()
