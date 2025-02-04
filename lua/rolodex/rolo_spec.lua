@@ -2,6 +2,12 @@ local rolodex = require("rolodex")
 
 local line = "abc def ghi"
 
+local line2 = "ads are always available"
+
+local line3 = "bill buys bananas in bundles at the store"
+
+local line4 = "carmen demolishes data centers distinctly"
+
 describe("Get Char", function()
 	it("is the first char", function()
 		local char, prev_char = rolodex.extract_chars(1, line)
@@ -75,24 +81,53 @@ describe("Eval Char", function()
 	end)
 end)
 
-describe("Test Rolodex AT WORD", function()
-	it("is at first word", function()
-		local start, finish = rolodex.get_word(line, "a")
-		assert.are.equal(start, 1)
-		assert.are.equal(finish, 3)
+describe("Get Words", function()
+	it("is at multiple words (line2)", function()
+		local starts, finishes = rolodex.get_words(line2, "a")
+		assert.are.equal(#starts, 4)
+		assert.are.equal(#finishes, 3)
+
+		assert.are.equal(starts[1], 1)
+		assert.are.equal(finishes[1], 3)
+
+		assert.are.equal(starts[2], 5)
+		assert.are.equal(finishes[2], 7)
+
+		assert.are.equal(starts[3], 9)
+		assert.are.equal(finishes[3], 14)
+
+		assert.are.equal(starts[4], 16)
 	end)
 
-	it("is at last word", function()
-		local start, finish = rolodex.get_word(line, "g")
-		assert.are.equal(start, 9)
-		assert.are.equal(finish, nil)
-	end)
-end)
+	it("is at multiple words (line3)", function()
+		local starts, finishes = rolodex.get_words(line3, "b")
+		assert.are.equal(#starts, 4)
+		assert.are.equal(#finishes, 4)
 
-describe("Test Rolodex FAIL", function()
-	it("Doesn't Find Words", function()
-		local start, finish = rolodex.get_word(line, "x")
-		assert.are.equal(start, nil)
-		assert.are.equal(finish, nil)
+		assert.are.equal(starts[1], 1)
+		assert.are.equal(finishes[1], 4)
+
+		assert.are.equal(starts[2], 6)
+		assert.are.equal(finishes[2], 9)
+
+		assert.are.equal(starts[3], 11)
+		assert.are.equal(finishes[3], 17)
+
+		assert.are.equal(starts[4], 22)
+		assert.are.equal(finishes[4], 28)
+	end)
+
+	it("is at multiple words (line4)", function()
+		local starts, finishes = rolodex.get_words(line4, "d")
+		assert.are.equal(#starts, 3)
+		assert.are.equal(#finishes, 2)
+
+		assert.are.equal(starts[1], 8)
+		assert.are.equal(finishes[1], 17)
+
+		assert.are.equal(starts[2], 19)
+		assert.are.equal(finishes[2], 22)
+
+		assert.are.equal(starts[3], 32)
 	end)
 end)
