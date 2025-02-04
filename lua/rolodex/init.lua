@@ -86,27 +86,6 @@ function M.is_on_target(line, prefix, pos)
 end
 
 function M.autocomplete_handler()
-    -- Get the current line and cursor position
-    local line = vim.api.nvim_get_current_line()
-    local pos = vim.api.nvim_win_get_cursor(0)[2] + 1
-
-    vim.notify("LINE=" .. line, vim.log.levels.INFO)
-    local start, finish, reason = get_word(line, "!")
-    vim.notify("reason=" .. reason)
-    if (start == nil) or (finish == nil) then
-        return nil
-    end
-
-    if (pos < start) or (pos > finish) then
-	    vim.notify("cursor not on target word")
-
-        return nil
-    end
-
-    local word = string.sub(line, start, finish)
-    print("Autocomplete triggered for word:", word)
-    vim.notify("WORD=" .. word)
-    return word
 end
 
 return M
