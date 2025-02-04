@@ -33,22 +33,30 @@ end
 -- if start == nil and end == nil then prefix not found.
 -- if start != nil and end == nil then prefix was found at the last word of the line.
 -- if start != nil and end != nil then prefix was found before the last word of the line.
-function M.get_word(line, prefix)
+function M.get_words(line, prefix)
 	local start = nil
+	local starts = {}
+
 	local finish = nil
+	local finishes = {}
 
 	for i = 1, #line do
 		char, prev_char = M.extract_chars(i, line)
 		if char == nil then
-			return start, finish
+			return starts, finishes
 		end
 
 		start, finish = M.eval_char(i, char, prev_char, prefix, start)
-		if (start ~= nil) and (finish ~= nil) then
-			return start, finish
+		if (start ~= nil) and ((finish ~= nil) or (i == #line)) then
+			table.insert(starts, start)
+			if (finish ~= nil) then
+				table.insert(finishes, finish)
+			end
+			start = nil
+			finish = nil
 		end
 	end
-	return start, finish
+	return starts, finishes
 end
 
 function M.autocomplete_handler()
