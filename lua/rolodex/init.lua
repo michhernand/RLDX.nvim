@@ -6,11 +6,9 @@ function M.autocomplete_handler()
 
 	if not line then return end
 
-	-- Extract word under cursor
 	local before_cursor = line:sub(1, col)
 	local after_cursor = line:sub(col + 1)
 
-	-- Match the word before and after the cursor
 	local word_start = before_cursor:match("(%S+)$") or ""
 	local word_end = after_cursor:match("^(%S*)") or ""
 
