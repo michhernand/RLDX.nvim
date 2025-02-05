@@ -7,7 +7,7 @@ import (
 
 	"github.com/urfave/cli/v3"
 
-	nvimcmd "dex/app/cmd/nvim"
+	"dex/lib/nvim"
 	dbcmd "dex/app/cmd/api"
 )
 
@@ -15,9 +15,9 @@ import (
 func main() {
 	cmd := &cli.Command{
 		Commands: []*cli.Command{
-			nvimcmd.Cmd,
 			dbcmd.Cmd,
 		},
+		Action: nvim.StartService,
 	}
 
 	ctx := context.Background()
