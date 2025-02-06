@@ -28,20 +28,11 @@ type Rolodex struct {
 
 func (r Rolodex) DexLookup(v *gonvim.Nvim, args []interface{}) ([]string, error) {
 	nargs := len(args)
-	if nargs != 2 {
-		return []string{} ,fmt.Errorf("n_args: expected=2, actual=%d", nargs)
+	if nargs != 1 {
+		return []string{} ,fmt.Errorf("n_args: expected=1, actual=%d", nargs)
 	}
 
-	in_prefix_word, ok := args[0].(bool)
-	if !ok {
-		return []string{}, fmt.Errorf("failed to cast arg to bool")
-	}
-
-	if !in_prefix_word {
-		return []string{}, nil
-	}
-
-	word, ok := args[1].(string)
+	word, ok := args[0].(string)
 	if !ok {
 		return []string{}, fmt.Errorf("failed to cast arg to string")
 	}
