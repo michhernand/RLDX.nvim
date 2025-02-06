@@ -7,7 +7,7 @@ M._options = nil
 local defaults = {
 	prefix_char = "@",
 	binary_path = "/Users/michael/dev/rolodex.nvim/dex",
-	case_sensitive = true,
+	case_sensitive = false,
 }
 
 local chan = nil
@@ -29,7 +29,6 @@ function M.detect_prefix(prefix_char, case_sensitive)
 		return {
 			false,
 			"",
-			case_sensitive
 		}
 	end
 
@@ -40,10 +39,16 @@ function M.detect_prefix(prefix_char, case_sensitive)
 	local word_end = after_cursor:match("^(%S*)") or ""
 
 	local word = word_start .. word_end
+	local in_prefix_word = (word:sub(1, 1) == prefix_char)
+
+	word = string.sub(word, 2, -1)
+	if case_sensitive == false then
+		word = word:lower()
+	end
+
 	return {
-		(word:sub(1, 1) == prefix_char), 
+		in_prefix_word,
 		word,
-		case_sensitive,
 	}
 end
 
@@ -72,6 +77,7 @@ function M.setup(options)
 			M.options.case_sensitive
 		)
 
+		vim.notify("LUA WORD: " .. prefix_args[2])
 		if prefix_args[1] == false then
 			vim.notify("Terminating Early")
 			return
