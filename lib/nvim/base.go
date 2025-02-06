@@ -18,7 +18,7 @@ type Rolodex struct {
 }
 
 
-func (r Rolodex) HandleRequest(v *gonvim.Nvim, args []interface{}) error {
+func (r Rolodex) DexLookup(v *gonvim.Nvim, args []interface{}) error {
 	nargs := len(args)
 	if nargs != 1 {
 		return v.WriteErr(fmt.Sprintf("n_args: expected=1, actual=%d", nargs))

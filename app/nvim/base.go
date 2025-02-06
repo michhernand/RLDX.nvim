@@ -32,7 +32,7 @@ func Start(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	v.RegisterHandler("dex_lookup", rolo.HandleRequest)
+	v.RegisterHandler("dex_lookup", rolo.DexLookup)
 
 	if err := v.Serve(); err != nil {
 		log.Fatal(err)
