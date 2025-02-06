@@ -3,6 +3,7 @@ package nvim
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	gonvim "github.com/neovim/go-client/nvim"
 
@@ -25,22 +26,36 @@ type Rolodex struct {
 }
 
 
-func (r Rolodex) DexLookup(v *gonvim.Nvim, args []interface{}) error {
+func (r Rolodex) DexLookup(v *gonvim.Nvim, args []interface{}) ([]string, error) {
 	nargs := len(args)
-	if nargs != 2 {
-		return v.WriteErr(fmt.Sprintf("n_args: expected=2 (text + pos), actual=%d", nargs))
+	if nargs != 3 {
+		return []string{} ,fmt.Errorf("n_args: expected=3, actual=%d", nargs)
 	}
 
 	in_prefix_word, ok := args[0].(bool)
 	if !ok {
-		return v.WriteErr("failed to cast arg to bool")
+		return []string{}, fmt.Errorf("failed to cast arg to bool")
 	}
 
-	if in_prefix_word {
-		return v.WriteOut(fmt.Sprintf("You're in a word"))
+	if !in_prefix_word {
+		return []string{}, nil
 	}
-	return nil
 
-	// return v.WriteOut(fmt.Sprintf("Hello %s\n", query))
+	word, ok := args[1].(string)
+	if !ok {
+		return []string{}, fmt.Errorf("failed to cast arg to string")
+	}
+
+	caseSensitive, ok := args[2].(bool)
+	if !ok {
+		return []string{}, fmt.Errorf("failed to cast arg to bool")
+	}
+
+	if !caseSensitive {
+		word = strings.ToLower(word)
+	}
+
+
+	return []string{word, "apple", "banana", "cherry"}, nil
 }
 
