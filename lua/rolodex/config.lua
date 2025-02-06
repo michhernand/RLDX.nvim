@@ -55,22 +55,6 @@ end
 function M.setup(options)
 	M.options = vim.tbl_deep_extend("force", {}, defaults, options or {})
 
-	if M.options.binary_path == nil then
-		vim.notify("binary_path not populated in opts", "error")
-	end
-
-	if M.options.binary_path == "" then
-		vim.notify("binary_path is empty string in opts", "error")
-	end
-
-	if M.options.prefix_char == nil then
-		vim.notify("prefix_char is not populated in opts", "error")
-	end
-
-	if M.options.prefix_char == "" then
-		vim.notify("prefix_char is empty string in opts", "error")
-	end
-
 	vim.api.nvim_create_user_command('DexLookup', function(args)
 		local prefix_args = M.detect_prefix(
 			M.options.prefix_char, 
