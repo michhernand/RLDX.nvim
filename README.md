@@ -88,5 +88,10 @@ opts = {
 ## Adding Names
 ![Demo for Adding Names](./repo/demo2.gif)
 
+# Roadmap
+- [ ] Delete contacts.
+- [ ] Update contacts.
+- [ ] Grep files by contact name.
+
 # Known Issues
 - Shows duplicate autocomplete recommendations.
