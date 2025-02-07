@@ -54,6 +54,9 @@ cmp.setup({
 }
 ```
 
+### Other Package Managers Coming Soon
+...
+
 # Configuration
 ## Default Configuration
 ```lua
