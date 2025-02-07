@@ -52,12 +52,19 @@ opts = {
 ### Prefix Char
 `prefix_char` (str) is the character that triggers autocomplete.
 
+### DB Filename
 `db_filename` (str) is the location where your contacts are stored.
 
+### Highlighting
+#### Highlight Enabled
 `highlight_enabled` (bool) is a flag indicating whether highlighting of names is enabled.
 
+#### Highlight Color
 `highlight_color` (str) is a hex color code indicating what color names should be highlighted as.
 
+#### Highlight Bold
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
 ## Usage
+### Autocomplete
+### Adding Names
