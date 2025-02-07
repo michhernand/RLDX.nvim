@@ -17,38 +17,31 @@
 
 nvim-cmp configuration for all file types.
 ```lua
-{
-    "hrsh7th/nvim-cmp",
-    local my_sources = {
-        -- your other sources
-        { name = "cmp_rolodex"},
-    }
-
-    local cmp = require("cmp")
-    cmp.setup({
-        sources = cmp.config.sources(my_sources),
-    })
+local my_sources = {
+    -- your other sources
+    { name = "cmp_rolodex"},
 }
+
+local cmp = require("cmp")
+cmp.setup({
+    sources = cmp.config.sources(my_sources),
+})
 ```
 
 nvim-cmp configuration for select file types.
 ```lua
-{
-    "hrsh7th/nvim-cmp",
-    local my_sources = {
-        -- your other sources
-        { name = "cmp_rolodex"},
-    }
-
-    local cmp = require("cmp")
-    cmp.setup({
-        sources = cmp.config.sources(my_sources),
-        cmp.setup.filetype({ "org", "md" }, {
-            sources = cmp.config.sources(my_sources)
-        })
-    })
+local my_sources = {
+    -- your other sources
+    { name = "cmp_rolodex"},
 }
 
+local cmp = require("cmp")
+cmp.setup({
+    sources = cmp.config.sources(my_sources),
+    cmp.setup.filetype({ "org", "md" }, {
+        sources = cmp.config.sources(my_sources)
+    })
+})
 ```
 
 ### Package Managers
