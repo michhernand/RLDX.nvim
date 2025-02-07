@@ -6,8 +6,12 @@ local utils = require("rolodex.utils")
 
 local M = {}
 
+function M.getPath(str)
+    return str:match("(.*[/\\])")
+end
 
 function M.setup(options)
+	os.execute("mkdir -p " .. getPath(utils.db_filename))
 	utils.resolve_opts(options)
 
 	if utils.options.highlight_enabled then

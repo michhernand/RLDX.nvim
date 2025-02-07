@@ -33,10 +33,31 @@ return {
 return {
     "github.com/michhernand/rolodex.nvim",
     lazy = true,
-    opts = {}
+    opts = {} -- see configuration docs for details
 }
 ```
 
 ## Configuration
+### Default Configuration
+```lua
+opts = {
+    prefix_char = "@",
+    db_filename = os.getenv("HOME") .. "/.rolodex/db.json"),
+    highlight_enabled = true,
+    highlight_color = "00ffff",
+    highlight_bold = true
+}
+```
+
+### Prefix Char
+`prefix_char` (str) is the character that triggers autocomplete.
+
+`db_filename` (str) is the location where your contacts are stored.
+
+`highlight_enabled` (bool) is a flag indicating whether highlighting of names is enabled.
+
+`highlight_color` (str) is a hex color code indicating what color names should be highlighted as.
+
+`highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
 ## Usage
