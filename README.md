@@ -49,8 +49,22 @@ cmp.setup({
 lazy configuration for all file types.
 ```lua
 {
-    "github.com/michhernand/rolodex.nvim",
+    "michhernand/rolodex.nvim",
     lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {} -- see configuration docs for details
+}
+```
+
+lazy configuration for select file types.
+```lua
+{
+    "michhernand/rolodex.nvim",
+    lazy = true,
+    event = {
+        "BufReadPost *.org", "BufNewFile *.org",
+        "BufReadPost *.md", "BufNewFile *.md",
+    },
     opts = {} -- see configuration docs for details
 }
 ```
