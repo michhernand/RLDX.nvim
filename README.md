@@ -46,6 +46,7 @@ cmp.setup({
 
 ## Package Managers
 ### Lazy
+lazy configuration for all file types.
 ```lua
 {
     "github.com/michhernand/rolodex.nvim",
@@ -97,4 +98,7 @@ opts = {
 - [ ] Grep files by contact name.
 
 # Known Issues
-- Shows duplicate autocomplete recommendations.
+## Shows duplicate autocomplete recommendations.
+This appears to happen when you add contacts and then query them in the same session. A workaround is to exit and re-launch Neovim.
+## Highlighting does not initialize on lazy loading.
+This appears to happen when lazy loading with Lazy.nvim. A workaround is to set `lazy = false` in opts.
