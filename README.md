@@ -15,7 +15,7 @@
 1. Add to your Neovim package manager's configuration. See specific steps below.
 2. Update your cmp-nvim configuration.
 ```lua
-return {
+{
     "hrsh7th/nvim-cmp",
 
     local my_sources = {
@@ -30,7 +30,7 @@ return {
 ### Package Managers
 #### Lazy
 ```lua
-return {
+{
     "github.com/michhernand/rolodex.nvim",
     lazy = true,
     opts = {} -- see configuration docs for details
