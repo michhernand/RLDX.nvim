@@ -85,3 +85,4 @@ opts = {
 ## Usage
 ### Autocomplete
 ### Adding Names
+![Demo for Adding Names](./repo/demo2.gif)
