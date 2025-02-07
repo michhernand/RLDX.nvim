@@ -12,9 +12,9 @@
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 
 ## Installation
-1. Add to your Neovim configuration. See specific steps below.
+1. Add to your Neovim package manager's configuration. See specific steps below.
 2. Update your cmp-nvim configuration.
-```
+```lua
 return {
     "hrsh7th/nvim-cmp",
 
@@ -29,7 +29,7 @@ return {
 
 ### Package Managers
 #### Lazy
-```
+```lua
 return {
     "github.com/michhernand/rolodex.nvim",
     lazy = true,
