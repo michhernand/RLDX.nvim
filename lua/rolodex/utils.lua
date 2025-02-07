@@ -5,7 +5,7 @@ M.options = {}
 
 M.defaults = {
 	prefix_char = "@",
-	db_filename = os.getenv("HOME") .. "/.rolodex/db.json"),
+	db_filename = os.getenv("HOME") .. "/.rolodex/db.json",
 	highlight_enabled = true,
 	highlight_color = "#00ffff",
 	highlight_bold = true,
