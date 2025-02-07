@@ -1,5 +1,23 @@
 local M = {}
 
+M.options = {}
+
+M.defaults = {
+	prefix_char = "@",
+	db_filename = "./db.json",
+	highlight_enabled = true,
+	highlight_color = "#00ffff",
+	highlight_bold = true,
+}
+
+function M.resolve_opts(options)
+	M.options = vim.tbl_deep_extend(
+		"force",
+		{}, M.defaults,
+		options or {}
+	)
+end
+
 function M.file_exists(filepath)
 	if filepath == nil then error("file exists received invalid argument") end
 	local file = io.open(filepath, "r")
@@ -12,9 +30,12 @@ function M.file_exists(filepath)
 end
 
 function M.write_json_file(filepath, data)
-	if filepath == nil then return false, "rolodex.nvim cannot find json db", "warn" end
-	local json_str = vim.fn.json_encode(data) -- Convert table to JSON string
-	local ok, err = pcall(vim.fn.writefile, { json_str }, filepath) -- Write to file
+	if filepath == nil then 
+		return false, "rolodex.nvim cannot find json db"
+	end
+
+	local json_str = vim.fn.json_encode(data)
+	local ok, err = pcall(vim.fn.writefile, { json_str }, filepath)
 	if not ok then
 		return false, "Failed to write file: " .. err
 	end
