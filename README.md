@@ -2,16 +2,16 @@
 
 ![Logo](./repo/logo.png)
 
-## Features
+# Features
 - Autocomplete for your contact list.
 - Syntax highlighting for contacts.
 ![Demo1](./repo/demo1.gif)
 
-## Requirements
+# Requirements
 - Tested on Neovim 0.10.0.
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 
-## Installation
+# Installation
 1. Add to your Neovim package manager's configuration. See specific steps below.
 2. Update your cmp-nvim configuration.
 
@@ -44,8 +44,8 @@ cmp.setup({
 })
 ```
 
-### Package Managers
-#### Lazy
+## Package Managers
+### Lazy
 ```lua
 {
     "github.com/michhernand/rolodex.nvim",
@@ -54,8 +54,8 @@ cmp.setup({
 }
 ```
 
-## Configuration
-### Default Configuration
+# Configuration
+## Default Configuration
 ```lua
 opts = {
     prefix_char = "@",
@@ -66,24 +66,27 @@ opts = {
 }
 ```
 
-### Prefix Char
+## Prefix Char
 `prefix_char` (str) is the character that triggers autocomplete.
 
-### DB Filename
+## DB Filename
 `db_filename` (str) is the location where your contacts are stored.
 
-### Highlighting
-#### Highlight Enabled
+## Highlighting
+### Highlight Enabled
 `highlight_enabled` (bool) is a flag indicating whether highlighting of names is enabled.
 
-#### Highlight Color
+### Highlight Color
 `highlight_color` (str) is a hex color code indicating what color names should be highlighted as.
 
-#### Highlight Bold
+### Highlight Bold
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
-## Usage
-### Autocomplete
+# Usage
+## Autocomplete
 ![Demo for Autocomplete](./repo/demo3.gif)
-### Adding Names
+## Adding Names
 ![Demo for Adding Names](./repo/demo2.gif)
+
+# Known Issues
+- Shows duplicate autocomplete recommendations.
