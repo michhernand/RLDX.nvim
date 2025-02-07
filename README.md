@@ -97,8 +97,8 @@ opts = {
 # Usage
 ## Autocomplete
 ![Demo for Autocomplete](./repo/demo3.gif)
-## Adding Names
-![Demo for Adding Names](./repo/demo2.gif)
+## Adding Contacts
+![Demo for Adding Contacts](./repo/demo2.gif)
 
 # Roadmap
 - [ ] Delete contacts.
