@@ -110,3 +110,6 @@ opts = {
 This appears to happen when you add contacts and then query them in the same session. A workaround is to exit and re-launch Neovim.
 ## Highlighting does not initialize on lazy loading.
 This appears to happen when lazy loading with Lazy.nvim. A workaround is to set `lazy = false` in opts.
+
+# Acknowledgements
+- JSON read / write functionality is provided by [json.lua](https://github.com/rxi/json.lua?tab=readme-ov-file).
