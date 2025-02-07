@@ -9,6 +9,7 @@ M.defaults = {
 	highlight_enabled = true,
 	highlight_color = "#00ffff",
 	highlight_bold = true,
+	encryption = "xor", -- Options: xor, <more to come>
 }
 
 function M.resolve_opts(options)
