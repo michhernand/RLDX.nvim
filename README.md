@@ -110,3 +110,7 @@ opts = {
 This appears to happen when you add contacts and then query them in the same session. A workaround is to exit and re-launch Neovim.
 ## Highlighting does not initialize on lazy loading.
 This appears to happen when lazy loading with Lazy.nvim. A workaround is to set `lazy = false` in opts.
+- Only highlighting is affected here. Other functionality is unaffected.
+## Highlighting does not intiialize some org-roam files.
+This appears to happen when a new org-roam file is created via org-roam-capture. This resolves when Neovim is restarted.
+- Only highlighting is affected here. Other functionality is unaffected.
