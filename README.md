@@ -2,6 +2,10 @@
 
 ![Logo](./repo/logo.png)
 
+**Experience an Issue?**
+1. Review the [Known Issues](#known-issues) to find a workaround.
+2. If the issue is new then create a [Github issue](https://github.com/michhernand/rolodex.nvim/issues).
+
 # Features
 - Autocomplete for your contact list.
 - Syntax highlighting for contacts.
