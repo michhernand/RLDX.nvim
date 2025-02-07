@@ -1,10 +1,10 @@
-# rolodex.nvim
+# RLDX.nvim
 
 ![Logo](./repo/logo.png)
 
 **Experience an Issue?**
 1. Review the [Known Issues](#known-issues) to find a workaround.
-2. If the issue is new then create a [Github issue](https://github.com/michhernand/rolodex.nvim/issues).
+2. If the issue is new then create a [Github issue](https://github.com/michhernand/RLDX.nvim/issues).
 
 # Features
 - Autocomplete for your contact list.
@@ -43,7 +43,7 @@ require('cmp').setup.filetype('org', {
 lazy configuration for all file types.
 ```lua
 {
-    "michhernand/rolodex.nvim",
+    "michhernand/RLDX.nvim",
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
     opts = {} -- see configuration docs for details
@@ -53,7 +53,7 @@ lazy configuration for all file types.
 lazy configuration for select file types.
 ```lua
 {
-    "michhernand/rolodex.nvim",
+    "michhernand/RLDX.nvim",
     lazy = true,
     event = {
         "BufReadPost *.org", "BufNewFile *.org",
