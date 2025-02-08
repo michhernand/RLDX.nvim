@@ -6,7 +6,7 @@ function M.reset()
 	require("rolodex").setup()
 end
 
-M.VERSION = "0.0.2"
+M.VERSION = "0.1.0"
 
 M.setup = config.setup
 
