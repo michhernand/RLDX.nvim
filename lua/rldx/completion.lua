@@ -1,7 +1,7 @@
 local cmp = require("cmp")
 
-local utils = require("rldx.utils")
-local v0_0_2_crud = require("rldx.schema.v0_0_2.crud")
+local sett = require("rldx.settings")
+local crud = require("rldx.schema.crud")
 
 local M = {}
 
@@ -20,7 +20,7 @@ M.source.is_available = function()
 end
 
 M.source.get_trigger_characters = function()
-	return { utils.options.prefix_char }
+	return { sett.options.prefix_char }
 end
 
 M.source.complete = function(_, request, callback)
@@ -28,7 +28,7 @@ M.source.complete = function(_, request, callback)
 end
 
 function M.update_completion_options(content)
-	for _, entry in ipairs(utils.sort(content)) do
+	for _, entry in ipairs(content) do
 		table.insert(M.completion_options, {
 			label = entry.name,
 			kind = cmp.lsp.CompletionItemKind.Text,
@@ -38,14 +38,14 @@ end
 
 function M.rolodex_add_cmd(opts)
 	local name = opts.args
-	ok, err = v0_0_2_crud.add_contact(
-		utils.options.db_filename,
+	ok, err = crud.add_contact(
+		sett.options.db_filename,
 		name, 
 		M.completion_db
 	)
 
 	M.update_completion_options(M.completion_db)
-	vim.notify("Added '" .. name .. "' to Rolodex")
+	vim.notify("Added '" .. name .. "' to Catalog")
 end
 
 return M
