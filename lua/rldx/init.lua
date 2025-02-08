@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 local sett = require("rldx.settings")
 local crud = require("rldx.utils.crud")
+local hl = require("rldx.highlighting")
 
 local M = {}
 
@@ -12,9 +13,6 @@ M.VERSION = "0.1.0"
 
 M.contacts = {}
 
-
-
-
 function M.getPath(str)
 	return str:match("(.*[/\\])")
 end
@@ -23,6 +21,13 @@ function M.setup(options)
 	sett.resolve_opts(options)
 	os.execute("mkdir -p " .. M.getPath(sett.options.filename))
 	os.execute("touch " .. sett.options.filename)
+
+	if sett.options.highlight_enabled then
+		hl.setup_highlight(
+			sett.options.highlight_color,
+			sett.options.highlight_bold
+		)
+	end
 
 	-- Load Contacts Database
 	M.contacts, err = crud.load_contacts(
@@ -48,7 +53,8 @@ function M.setup(options)
 	)
 end
 
-
+-- ########################################################
+-- COMMANDS
 function M.rldx_list_cmd(opts)
 	vim.notify(vim.inspect(M.contacts))
 end
@@ -75,8 +81,10 @@ function M.rldx_add_cmd(opts)
 		vim.notify(err)
 	end
 end
+-- ########################################################
 
 
+-- ########################################################
 -- cmp source configuration
 M.source = {}
 
@@ -95,5 +103,6 @@ end
 M.source.complete = function(_, request, callback)
 	callback(M.contacts)
 end
+-- ########################################################
 
 return M

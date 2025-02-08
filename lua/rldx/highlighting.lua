@@ -1,11 +1,9 @@
-local utils = require("rldx.utils")
-
 local M = {}
 
-function M.setup_highlight()
+function M.setup_highlight(color, bold)
 	vim.api.nvim_set_hl(0, "RolodexHighlight", { 
-		fg = utils.options.highlight_color, 
-		bold = utils.options.highlight_bold
+		fg = color, 
+		bold =bold, 
 	})
 
 	vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
