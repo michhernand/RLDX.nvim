@@ -1,3 +1,5 @@
+local cmp = require("cmp")
+
 local M = {}
 
 function M.to_completions(data)
@@ -27,3 +29,5 @@ function M.from_completions(data)
 	end
 	return output
 end
+
+return M
