@@ -1,10 +1,10 @@
-# rolodex.nvim
+# RLDX.nvim
 
 ![Logo](./repo/logo.png)
 
 **Experience an Issue?**
 1. Review the [Known Issues](#known-issues) to find a workaround.
-2. If the issue is new then create a [Github issue](https://github.com/michhernand/rolodex.nvim/issues).
+2. If the issue is new then create a [Github issue](https://github.com/michhernand/RLDX.nvim/issues).
 
 # Features
 - Autocomplete for your contact list.
@@ -43,7 +43,7 @@ require('cmp').setup.filetype('org', {
 lazy configuration for all file types.
 ```lua
 {
-    "michhernand/rolodex.nvim",
+    "michhernand/RLDX.nvim",
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
     opts = {} -- see configuration docs for details
@@ -53,7 +53,7 @@ lazy configuration for all file types.
 lazy configuration for select file types.
 ```lua
 {
-    "michhernand/rolodex.nvim",
+    "michhernand/RLDX.nvim",
     lazy = true,
     event = {
         "BufReadPost *.org", "BufNewFile *.org",
@@ -110,6 +110,10 @@ opts = {
 This appears to happen when you add contacts and then query them in the same session. A workaround is to exit and re-launch Neovim.
 ## Highlighting does not initialize on lazy loading.
 This appears to happen when lazy loading with Lazy.nvim. A workaround is to set `lazy = false` in opts.
+- Only highlighting is affected here. Other functionality is unaffected.
+## Highlighting does not intiialize some org-roam files.
+This appears to happen when a new org-roam file is created via org-roam-capture. This resolves when Neovim is restarted.
+- Only highlighting is affected here. Other functionality is unaffected.
 
 # Acknowledgements
 - JSON read / write functionality is provided by [json.lua](https://github.com/rxi/json.lua?tab=readme-ov-file).
