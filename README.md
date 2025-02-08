@@ -59,6 +59,9 @@ lazy configuration for select file types.
         "BufReadPost *.org", "BufNewFile *.org",
         "BufReadPost *.md", "BufNewFile *.md",
     },
+    dependencies = {
+        "user-none/lua-hashings",
+    }
     opts = {} -- see configuration docs for details
 }
 ```
@@ -117,3 +120,5 @@ This appears to happen when a new org-roam file is created via org-roam-capture.
 
 # Acknowledgements
 - JSON read / write functionality is provided by [json.lua](https://github.com/rxi/json.lua?tab=readme-ov-file).
+- lua/lua-nums is provided by [lua-nums](https://github.com/user-none/lua-nums)
+- lua/lua-hashings is provided by [lua-hashings](https://github.com/user-none/lua-hashings)
