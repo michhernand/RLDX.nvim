@@ -1,4 +1,4 @@
-local utils = require("rldx.utils")
+local utils = require("rldx.utils.fs")
 local middleware = require("rldx.schema.v0_0_2.middleware")
 
 local M = {}
