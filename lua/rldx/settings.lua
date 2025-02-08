@@ -4,7 +4,7 @@ M.options = {}
 
 M.defaults = {
 	prefix_char = "@",
-	db_filename = os.getenv("HOME") .. "/.rldx/db.json",
+	filename = os.getenv("HOME") .. "/.rldx/db.json",
 	highlight_enabled = true,
 	highlight_color = "#00ffff",
 	highlight_bold = true,
@@ -18,3 +18,5 @@ function M.resolve_opts(options)
 		options or {}
 	)
 end
+
+return M
