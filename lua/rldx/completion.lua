@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 
-local utils = require("rolodex.utils")
+local utils = require("rldx.utils")
+local v0_0_2_crud = require("rldx.schema.v0_0_2.crud")
 
 local M = {}
 
@@ -37,10 +38,10 @@ end
 
 function M.rolodex_add_cmd(opts)
 	local name = opts.args
-	table.insert(M.completion_db, {name=name, count=0})
-	utils.write_json_file(
-		utils.options.db_filename, 
-		utils.sort(M.completion_db)
+	ok, err = v0_0_2_crud.add_contact(
+		utils.options.db_filename,
+		name, 
+		M.completion_db
 	)
 
 	M.update_completion_options(M.completion_db)

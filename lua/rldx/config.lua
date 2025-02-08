@@ -1,8 +1,8 @@
 local cmp = require("cmp")
-local comp = require("rolodex.completion")
-local hl = require("rolodex.highlighting")
+local comp = require("rldx.completion")
+local hl = require("rldx.highlighting")
 
-local utils = require("rolodex.utils")
+local utils = require("rldx.utils")
 
 local M = {}
 

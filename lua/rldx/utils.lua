@@ -5,7 +5,7 @@ M.options = {}
 
 M.defaults = {
 	prefix_char = "@",
-	db_filename = os.getenv("HOME") .. "/.rolodex/db.json",
+	db_filename = os.getenv("HOME") .. "/.rldx/db.json",
 	highlight_enabled = true,
 	highlight_color = "#00ffff",
 	highlight_bold = true,
@@ -33,7 +33,7 @@ end
 
 function M.write_json_file(filepath, data)
 	if filepath == nil then 
-		return false, "rolodex.nvim cannot find json db"
+		return false, "rldx.nvim cannot find json db"
 	end
 
 	local json_str = vim.fn.json_encode(data)
@@ -45,7 +45,7 @@ function M.write_json_file(filepath, data)
 end
 
 function M.read_json_file(filepath, create)
-	if filepath == nil then return {}, "rolodex.nvim cannot find json db", "warn" end
+	if filepath == nil then return {}, "rldx.nvim cannot find json db", "warn" end
 	if (M.file_exists(filepath) == false) and (create == true) then
 		M.write_json_file(filepath, {})
 	end
@@ -56,7 +56,7 @@ function M.read_json_file(filepath, create)
 
 	local json_str = table.concat(content, "\n")
 	local ok, result = pcall(vim.fn.json_decode, json_str)
-	if not ok then return {}, "rolodex.nvim failed to parse contact json", "warn" end
+	if not ok then return {}, "rldx.nvim failed to parse contact json", "warn" end
 	return result, nil
 end
 
@@ -67,5 +67,20 @@ function M.sort(data)
 	return data
 end
 
+-- Credit: https://stackoverflow.com/questions/20066835/lua-remove-duplicate-elements
+function M.dedupe(data)
+	local hash = {}
+	local res = {}
+
+	for _,v in ipairs(data) do
+		if (not hash[v]) then
+			res[#res+1] = v
+			hash[v] = true
+		end
+	end
+	return res
+end
+
 return M
+
 

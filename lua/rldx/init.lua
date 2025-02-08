@@ -1,9 +1,9 @@
-local config = require("rolodex.config")
+local config = require("rldx.config")
 
 local M = {}
 
 function M.reset()
-	require("rolodex").setup()
+	require("rldx").setup()
 end
 
 M.VERSION = "0.1.0"

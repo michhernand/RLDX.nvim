@@ -1,4 +1,4 @@
-local utils = require("rolodex.utils")
+local utils = require("rldx.utils")
 
 local M = {}
 
