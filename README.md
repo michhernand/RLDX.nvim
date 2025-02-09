@@ -74,7 +74,7 @@ lazy configuration for select file types.
 ```lua
 opts = {
     prefix_char = "@",
-    db_filename = os.getenv("HOME") .. "/.rolodex/db.json"),
+    filename = os.getenv("HOME") .. "/.rolodex/db.json"),
     highlight_enabled = true,
     highlight_color = "00ffff",
     highlight_bold = true
@@ -85,7 +85,7 @@ opts = {
 `prefix_char` (str) is the character that triggers autocomplete.
 
 ## DB Filename
-`db_filename` (str) is the location where your contacts are stored.
+`filename` (str) is the location where your contacts are stored.
 
 ## Highlighting
 ### Highlight Enabled
@@ -96,6 +96,70 @@ opts = {
 
 ### Highlight Bold
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
+
+## [Optional] Formatting for nvim-cmp
+An optional feature is to add formatting for nvim-cmp to display the type and source of the completion.
+
+```lua
+-- nvim-cmp.lua
+
+return {
+    "hrsh7th/nvim-cmp",
+    config = function()
+        formatting = {
+            format = function(entry, vim_item)
+                if entry.source.name = "cmp_rolodex" then
+                    vim_item.kind = "📇 Contact"
+                    vim_item.menu = "[RLDX]"
+                end
+                return vim_item
+            end
+        }
+    end
+}
+```
+
+You may already have `formatting` configured. Possibly like...
+```lua
+return {
+    "hrsh7th/nvim-cmp",
+    config = function()
+        formatting = {
+            format = lspkind.cmp_format({
+            maxwidth = 50,
+                ellipsis_char = "...",
+            }),
+        }
+    end
+}
+```
+
+In such a case, you can merge your `formatting` with the RLDX `formatting`.
+```lua
+return {
+    "hrsh7th/nvim-cmp",
+    config = function()
+	formatting = {
+		format = function(entry, vim_item)
+            -- Existing configuration
+		    local format_func = lspkind.cmp_format({
+				maxwidth = 50,
+				ellipsis_char = "...",
+			})
+			vim_item = format_func(entry, vim_item)
+
+            -- RLDX configuration
+			if entry.source.name == "cmp_rolodex" then
+				vim_item.kind = "📇 Contact"
+				vim_item.menu = "[RLDX]"
+			end
+
+			return vim_item
+		end
+	}
+    end
+}
+```
 
 # Usage
 ## Autocomplete

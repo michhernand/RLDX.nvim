@@ -1,7 +1,6 @@
 local cmp = require("cmp")
 local sett = require("rldx.settings")
 local crud = require("rldx.utils.crud")
-local hl = require("rldx.highlighting")
 
 local M = {}
 
@@ -17,13 +16,30 @@ function M.getPath(str)
 	return str:match("(.*[/\\])")
 end
 
+function M.setup_highlight(color, bold)
+	vim.api.nvim_set_hl(0, "RolodexHighlight", { 
+		fg = color, 
+		bold =bold, 
+	})
+
+	vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+		pattern = "*",
+		callback = function()
+			vim.cmd [[
+			syntax match RolodexPattern /\v\@\w+\.\w+/
+			highlight link RolodexPattern RolodexHighlight
+			]]
+		end,
+	})
+end
+
 function M.setup(options)
 	sett.resolve_opts(options)
 	os.execute("mkdir -p " .. M.getPath(sett.options.filename))
 	os.execute("touch " .. sett.options.filename)
 
 	if sett.options.highlight_enabled then
-		hl.setup_highlight(
+		M.setup_highlight(
 			sett.options.highlight_color,
 			sett.options.highlight_bold
 		)
