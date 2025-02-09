@@ -88,7 +88,7 @@ function M.rldx_add_cmd(opts)
 	ok, err = crud.save_contacts(
 		sett.options.filename,
 		M.contacts,
-		"0.0.2"
+		sett.options.schema_ver
 	)
 	
 	if ok == true then
