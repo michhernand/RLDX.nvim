@@ -109,7 +109,7 @@ return {
         formatting = {
             format = function(entry, vim_item)
                 if entry.source.name = "cmp_rolodex" then
-				    vim_item.kind = "📇 Contact"
+                    vim_item.kind = "📇 Contact"
                     vim_item.menu = "[RLDX]"
                 end
                 return vim_item
