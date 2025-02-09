@@ -5,15 +5,6 @@ local M = {}
 function M.to_completions(data)
 	local output = {}
 
-	local ver = nil
-	if data["header"] and data["header"]["rldx_schema"] then
-		ver = data["header"]["rldx_schema"]
-	end
-
-	if ver ~= "0.1.0" then
-		error("tried to read schema ver " .. ver .. " with 0.1.0 adapter")
-	end
-
 	if data["contacts"] == nil then
 		error("data with schema ver 1.1.0 is missing 'contacts' key")
 	end
@@ -30,7 +21,7 @@ function M.to_completions(data)
 	return output
 end
 
-function M.from_copmletions(data)
+function M.from_completions(data)
 	local output = {
 		header = {
 			rldx_schema = "0.1.0"
@@ -49,4 +40,7 @@ function M.from_copmletions(data)
 			}
 		}
 	end
+	return output
 end
+
+return M
