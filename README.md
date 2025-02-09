@@ -74,7 +74,7 @@ lazy configuration for select file types.
 ```lua
 opts = {
     prefix_char = "@",
-    db_filename = os.getenv("HOME") .. "/.rolodex/db.json"),
+    filename = os.getenv("HOME") .. "/.rolodex/db.json"),
     highlight_enabled = true,
     highlight_color = "00ffff",
     highlight_bold = true
@@ -85,7 +85,7 @@ opts = {
 `prefix_char` (str) is the character that triggers autocomplete.
 
 ## DB Filename
-`db_filename` (str) is the location where your contacts are stored.
+`filename` (str) is the location where your contacts are stored.
 
 ## Highlighting
 ### Highlight Enabled
