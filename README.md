@@ -97,6 +97,70 @@ opts = {
 ### Highlight Bold
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
+## [Optional] Formatting for nvim-cmp
+An optional feature is to add formatting for nvim-cmp to display the type and source of the completion.
+
+```lua
+-- nvim-cmp.lua
+
+return {
+    "hrsh7th/nvim-cmp",
+    config = function()
+        formatting = {
+            format = function(entry, vim_item)
+                if entry.source.name = "cmp_rolodex" then
+				    vim_item.kind = "📇 Contact"
+                    vim_item.menu = "[RLDX]"
+                end
+                return vim_item
+            end
+        }
+    end
+}
+```
+
+You may already have `formatting` configured. Possibly like...
+```lua
+return {
+    "hrsh7th/nvim-cmp",
+    config = function()
+        formatting = {
+            format = lspkind.cmp_format({
+            maxwidth = 50,
+                ellipsis_char = "...",
+            }),
+        }
+    end
+}
+```
+
+In such a case, you can merge your `formatting` with the RLDX `formatting`.
+```lua
+return {
+    "hrsh7th/nvim-cmp",
+    config = function()
+	formatting = {
+		format = function(entry, vim_item)
+            -- Existing configuration
+		    local format_func = lspkind.cmp_format({
+				maxwidth = 50,
+				ellipsis_char = "...",
+			})
+			vim_item = format_func(entry, vim_item)
+
+            -- RLDX configuration
+			if entry.source.name == "cmp_rolodex" then
+				vim_item.kind = "📇 Contact"
+				vim_item.menu = "[RLDX]"
+			end
+
+			return vim_item
+		end
+	}
+    end
+}
+```
+
 # Usage
 ## Autocomplete
 ![Demo for Autocomplete](./repo/demo3.gif)
