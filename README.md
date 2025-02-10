@@ -44,8 +44,7 @@ lazy configuration for all file types.
 ```lua
 {
     "michhernand/RLDX.nvim",
-    lazy = true,
-    event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
     dependencies = {
         "hrsh7th/nvim-cmp",
     },
@@ -57,11 +56,7 @@ lazy configuration for select file types.
 ```lua
 {
     "michhernand/RLDX.nvim",
-    lazy = true,
-    event = {
-        "BufReadPost *.org", "BufNewFile *.org",
-        "BufReadPost *.md", "BufNewFile *.md",
-    },
+    event = "VeryLazy",
     dependencies = {
         "hrsh7th/nvim-cmp",
     },
@@ -81,6 +76,7 @@ opts = {
     highlight_enabled = true,
     highlight_color = "00ffff",
     highlight_bold = true,
+    schema_ver = "latest",
     encryption = "elementwise_xor",
 }
 ```
@@ -101,10 +97,13 @@ opts = {
 ### Highlight Bold
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
-## encryption
+## Schema Version
+`schema_ver` (string) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2' or '0.1.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest backwards-compatible schema.
+
+## Encryption
 `encryption` (str) is the chosen encryption methodology. Options include:
 - `plaintext`: No encryption of fields.
-- `elementwise_xor`: xor encryption of each contact.
+- `elementwise_xor` (only available for schema_ver >= '0.1.0'): xor encryption of each contact.
 
 ## [Optional] Formatting for nvim-cmp
 An optional feature is to add formatting for nvim-cmp to display the type and source of the completion.
@@ -176,8 +175,97 @@ return {
 ## Adding Contacts
 ![Demo for Adding Contacts](./repo/demo2.gif)
 
+# Obfuscation
+RLDX does **not** provide any guarantees around security or encryption. If you want a more secure setup, then it's recommended to manually encrypt your catalog file using another tool.
+
+What RLDX does offer (in `schema_ver` >= 0.1.0) is:
+- **Very** light encryption of names.
+- Hashing of names to guarantee uniqueness.
+
+To reiterate, neither of the above features should be considered security features. Rather, they provide a light layer of obfuscation for your catalog.
+
+To enable obfuscation, set 'encryption' to 'elementwise_xor' in your opts. Additionally, set the `RLDX_ENCRYPTION_KEY` environment variable.
+
+## Nuances
+### Catalog Upgarde
+In this example, let's assume a user has the following catalog:
+```lua
+-- Schema Version 0.0.2
+{
+	{
+		"name": "bender.rodriguez",
+		"count": 10
+	},
+	{
+		"name": "hermes.conrad",
+		"count": 4
+	}
+}
+```
+
+If `opts.schema_ver` is set to `0.1.0` or `latest`, then:
+- RLDX will read the catalog using the v0.0.2 schema.
+- When RLDX writes the catalog out, it will use the v0.1.0 schema.
+    - Note, if `opts.encryption` is set to `elementwise_xor` then the `RLDX_ENCRYPTION_KEY` environment variable must be set. Otherwise, read / write operations will fail.
+
+Otherwise, if `opts.schema_ver` is set to `0.0.2`, then:
+- RLDX will read and write the catalog using the v0.0.2 schema.
+- Encryption and hashing features will be disabled.
+
+### Unencrypted Catalog
+In this example, let's assume the user has the following catalog:
+```lua
+{
+	"header" = {
+		"rldx_schema" = "0.1.0"
+	},
+
+	"contacts": {
+		"md5::6249d49c40f102ed53ba5e680d016085": {
+			"name": "bender.rodriguez",
+			"metadata": {
+				"encryption": "plaintext"
+			}
+		},
+	}
+}
+```
+
+If `opts.schema_ver` is set to `0.0.2` then a schema DOWNGRADE will occur upon write.
+
+Otherwise, if `opts.schema_ver` is set to `0.1.0` or `latest`, then:
+- RLDX will read and write the catalog using the v0.1.0 schema.
+- If `opts.encryption` is set to `elementwise_xor` and `RLDX_ENCRYPTION_KEY` is set. Then, upon write, the catalog entries will be lightly encrypted. See `Encrypted Catalog` section for an example.
+- If `opts.encryption` is set to `plaintext`, then the `name` attribute of each contact will remain as plaintext.
+
+### Encrypted Catalog
+In this example, let's assume the user has the following catalog:
+```lua
+{
+	"header" = {
+		"rldx_schema" = "0.1.0"
+	},
+
+	"contacts": {
+		"md5::6249d49c40f102ed53ba5e680d016085": {
+			"name": "04101a11171343130911061c1514081b",
+			"metadata": {
+				"encryption": "plaintext"
+			}
+		},
+	}
+}
+```
+
+Similar to earlier, if `opts.schema_ver` is set to `0.0.2` then a schema DOWNGRADE will occur upon write.
+
+Otherwise, if `opts.schema_ver` is set to `0.1.0` or `latest`, then:
+- RLDX will read and write the catalog using the v0.1.0 schema.
+- If `opts.encryption` is set to `elementwise_xor` and `RLDX_ENCRYPTION_KEY` is set. Then, upon write, the catalog entries will be lightly encrypted.
+- If `opts.encryption` is set to `plaintext`, then the `name` attribute of each contact will remain as plaintext.
+
 # Roadmap
-- [ ] Encryption
+- [X] Light encryption
 - [ ] Delete contacts.
 - [ ] Update contacts.
 - [ ] Blink.nvim compatability.
