@@ -1,6 +1,13 @@
+local dotenv = require("rldx.extras.dotenv")
+
+
 local M = {}
 
 M.options = {}
+
+M.session = {
+	encryption_key = os.getenv("RLDX_ENCRYPTION_KEY")
+}
 
 M.defaults = {
 	prefix_char = "@",
@@ -10,6 +17,7 @@ M.defaults = {
 	highlight_bold = true,
 	schema_ver = "latest",
 	encryption = "elementwise_xor", -- Options: xor, <more to come>
+	dotenv_file = "./.env"
 }
 
 function M.resolve_opts(options)
