@@ -5,11 +5,11 @@ local v0_1_0_mw = require("rldx.utils.v0_1_0.middleware")
 
 local M = {}
 
-function M.save_contacts(filepath, catalog, ver)
+function M.save_contacts(filepath, catalog, ver, opts)
 	if ver == "0.0.2" then
-		catalog = v0_0_2_mw.from_completions(catalog)
+		catalog = v0_0_2_mw.from_completions(catalog, opts)
 	elseif (ver == "0.1.0") or (ver == "latest") then
-		catalog = v0_1_0_mw.from_completions(catalog)
+		catalog = v0_1_0_mw.from_completions(catalog, opts)
 	elseif ver == nil then
 		vim.notify("invlaid schema version: nil", "error")
 		return false
@@ -31,7 +31,7 @@ function M.save_contacts(filepath, catalog, ver)
 	return true
 end
 
-function M.load_contacts(filepath, create)
+function M.load_contacts(filepath, create, opts)
 	local catalog, err = fs.read_json_file(filepath, create)
 	if err ~= nil then
 		vim.notify(err, "error")
@@ -47,9 +47,9 @@ function M.load_contacts(filepath, create)
 	end
 
 	if ver == "0.0.2" then
-		catalog = v0_0_2_mw.to_completions(catalog)
+		catalog = v0_0_2_mw.to_completions(catalog, opts)
 	elseif ver == "0.1.0" then
-		catalog = v0_1_0_mw.to_completions(catalog)
+		catalog = v0_1_0_mw.to_completions(catalog, opts)
 	elseif ver == nil then
 		vim.notify("invlaid schema version: nil", "error")
 		return {}
