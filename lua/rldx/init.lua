@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 local sett = require("rldx.settings")
 local crud = require("rldx.utils.crud")
+local algos = require("rldx.utils.algos")
 
 local M = {}
 
@@ -95,6 +96,7 @@ end
 -- Add a contact to catalog
 function M.rldx_add_cmd(opts)
 	local name = opts.args
+
 	table.insert(
 		M.contacts, 
 		{
@@ -110,15 +112,16 @@ function M.rldx_add_cmd(opts)
 
 	ok, err = crud.save_contacts(
 		sett.options.filename,
-		M.contacts,
+		algos.copy_table(M.contacts),
 		sett.options.schema_ver,
 		enc_opts
 	)
-	
+
 	if ok == true then
 		vim.notify("Added '" .. name .. "' to Catalog")
 	else
-		vim.notify(err)
+		vim.notify("Failed to add contact to Catalog")
+		return
 	end
 end
 -- ########################################################
