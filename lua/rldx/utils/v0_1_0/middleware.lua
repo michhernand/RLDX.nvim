@@ -56,10 +56,25 @@ end
 function M.to_completions(data, opts)
 	local output = {}
 
+	local abort = false
+	local badkey = (opts["key"] == nil) or (opts["key"] == "")
+	if (opts["encryption"] ~= "plaintext") and badkey then
+		vim.notify("RLDX_ENCRYPTION_KEY environment variable missing", "error")
+		abort = true
+	end
+
 	for name, value in pairs(data.contacts) do
-		value, opts, abort = load.from_hex(value, opts, false)
-		value, opts, abort = load.decrypt(value, opts, abort)
-		value, opts, abort = load.format(value, opts, abort)
+		if abort == false then
+			value, opts, abort = load.from_hex(value, opts, false)
+		end
+
+		if abort == false then
+			value, opts, abort = load.decrypt(value, opts, abort)
+		end
+
+		if abort == false then
+			value, opts, abort = load.format(value, opts, abort)
+		end
 
 		if abort then
 			vim.notify("RLDX is aborting catalog load", "warn")
@@ -127,11 +142,31 @@ end
 function M.from_completions(data, opts)
 	local contacts = {}
 
+	local abort = false
+	local badkey = (opts["key"] == nil) or (opts["key"] == "")
+	if (opts["encryption"] ~= "plaintext") and badkey then
+		vim.notify("RLDX_ENCRYPTION_KEY environment variable missing", "error")
+		abort = true
+	end
+
 	for _, entry in ipairs(data) do
 		hashed_name = "md5::" .. h.sumhexa(entry.label)
+		if opts["encryption"] == nil then
+			vim.notify(
+				"no RLDX encryption settings were provided",
+				"error"
+			)
+			return nil
+		end
 
-		entry, opts, abort = save.encrypt(entry, opts, false)
-		entry, opts, abort = save.to_hex(entry, opts, abort)
+
+		if abort == false then
+			entry, opts, abort = save.encrypt(entry, opts, false)
+		end
+
+		if abort == false then
+			entry, opts, abort = save.to_hex(entry, opts, abort)
+		end
 
 		if abort then
 			vim.notify("RLDX is aborting catalog save", "warn")
