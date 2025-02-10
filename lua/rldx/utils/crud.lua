@@ -1,4 +1,5 @@
 local fs = require("rldx.utils.fs")
+local algos = require("rldx.utils.algos")
 
 local v0_0_2_mw = require("rldx.utils.v0_0_2.middleware")
 local v0_1_0_mw = require("rldx.utils.v0_1_0.middleware")
@@ -15,6 +16,10 @@ function M.save_contacts(filepath, catalog, ver, opts)
 		return false
 	else
 		vim.notify("invalid schema version: " .. ver, "error")
+		return false
+	end
+
+	if catalog == nil then
 		return false
 	end
 
@@ -55,6 +60,10 @@ function M.load_contacts(filepath, create, opts)
 		return {}
 	else
 		vim.notify("invalid schema version: " .. ver, "error")
+		return {}
+	end
+
+	if catalog == nil then
 		return {}
 	end
 
