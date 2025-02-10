@@ -8,6 +8,7 @@ M.defaults = {
 	highlight_enabled = true,
 	highlight_color = "#00ffff",
 	highlight_bold = true,
+	schema_ver = "latest",
 	encryption = "xor", -- Options: xor, <more to come>
 }
 
