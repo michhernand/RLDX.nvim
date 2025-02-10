@@ -2,6 +2,10 @@ local M = {}
 
 M.options = {}
 
+M.session = {
+	encryption_key = os.getenv("RLDX_ENCRYPTION_KEY")
+}
+
 M.defaults = {
 	prefix_char = "@",
 	filename = os.getenv("HOME") .. "/.rldx/db.json",

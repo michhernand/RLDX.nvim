@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 local sett = require("rldx.settings")
 local crud = require("rldx.utils.crud")
+local algos = require("rldx.utils.algos")
 
 local M = {}
 
@@ -19,7 +20,7 @@ end
 function M.setup_highlight(color, bold)
 	vim.api.nvim_set_hl(0, "RolodexHighlight", { 
 		fg = color, 
-		bold =bold, 
+		bold = bold, 
 	})
 
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
@@ -35,6 +36,20 @@ end
 
 function M.setup(options)
 	sett.resolve_opts(options)
+
+	local nilkey = sett.session.encryption_key == nil
+	local emptykey = sett.session.encryption_key == ""
+	local plaintext = sett.session.encryption == "plaintext"
+
+	if nilkey then
+		sett.session.encryption_key = ""
+		if plaintext == false then
+			vim.notify("RLDX_ENCRYPTION_KEY env var missing", "warn")
+		end
+	elseif emptykey and (plaintext == false) then
+		vim.notify("RLDX_ENCRYPTION_KEY env var missing", "warn")
+	end
+
 	os.execute("mkdir -p " .. M.getPath(sett.options.filename))
 	os.execute("touch " .. sett.options.filename)
 
@@ -45,11 +60,16 @@ function M.setup(options)
 		)
 	end
 
+	enc_opts = {
+		encryption = sett.options.encryption,
+		key = sett.session.encryption_key,
+	}
+
 	-- Load Contacts Database
 	M.contacts, err = crud.load_contacts(
 		sett.options.filename,
 		true,
-		"0.0.2"
+		enc_opts
 	)
 
 	-- Register the Source with nvim-cmp
@@ -71,12 +91,16 @@ end
 
 -- ########################################################
 -- COMMANDS
+
+-- List catalog (for debug)
 function M.rldx_list_cmd(opts)
 	vim.notify(vim.inspect(M.contacts))
 end
 
+-- Add a contact to catalog
 function M.rldx_add_cmd(opts)
 	local name = opts.args
+
 	table.insert(
 		M.contacts, 
 		{
@@ -85,16 +109,23 @@ function M.rldx_add_cmd(opts)
 		}
 	)
 
+	enc_opts = {
+		encryption = sett.options.encryption,
+		key = sett.session.encryption_key,
+	}
+
 	ok, err = crud.save_contacts(
 		sett.options.filename,
-		M.contacts,
-		sett.options.schema_ver
+		algos.copy_table(M.contacts),
+		sett.options.schema_ver,
+		enc_opts
 	)
-	
+
 	if ok == true then
 		vim.notify("Added '" .. name .. "' to Catalog")
 	else
-		vim.notify(err)
+		vim.notify("Failed to add contact to Catalog")
+		return
 	end
 end
 -- ########################################################
