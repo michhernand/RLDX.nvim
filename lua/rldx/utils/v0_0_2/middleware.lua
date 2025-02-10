@@ -2,7 +2,7 @@ local cmp = require("cmp")
 
 local M = {}
 
-function M.to_completions(data)
+function M.to_completions(data, opts)
 	local output = {}
 	for _, entry in ipairs(data) do
 		table.insert(
@@ -16,7 +16,7 @@ function M.to_completions(data)
 	return output
 end
 
-function M.from_completions(data)
+function M.from_completions(data, opts)
 	local output = {}
 	for _, entry in ipairs(data) do
 		table.insert(
