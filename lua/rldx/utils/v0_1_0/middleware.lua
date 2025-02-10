@@ -40,6 +40,7 @@ function load.decrypt(value, opts, abort)
 
 	if (opts["key"] == nil) or (opts["key"] == "") then
 		vim.notify("no RLDX encryption key was provided", "error")
+		return value, opts, abort
 	end
 
 	value.name = xor(value.name, opts.key)
@@ -62,7 +63,7 @@ function M.to_completions(data, opts)
 
 		if abort then
 			vim.notify("RLDX is aborting catalog load", "warn")
-			return {}
+			return nil
 		end
 
 		table.insert(
@@ -110,7 +111,7 @@ function save.encrypt(entry, opts, abort)
 		return entry, opts, abort
 	end
 
-	if opts["key"] == nil then
+	if (opts["key"] == nil) or (opts["key"] == "") then
 		vim.notify(
 			"no RLDX encryption key was provided",
 			"error"
@@ -134,7 +135,7 @@ function M.from_completions(data, opts)
 
 		if abort then
 			vim.notify("RLDX is aborting catalog save", "warn")
-			return {}
+			return nil
 		end
 
 		contacts[hashed_name] = {
@@ -144,7 +145,7 @@ function M.from_completions(data, opts)
 			}
 		}
 	end
-
+ 
 	return {
 		header = {
 			rldx_schema = "0.1.0"
