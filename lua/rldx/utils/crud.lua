@@ -39,12 +39,11 @@ function M.load_contacts(filepath, create)
 	end
 
 	local ver = nil
+	local msg = nil
 	if catalog["header"] and catalog["header"]["rldx_schema"] then
 		ver = catalog["header"]["rldx_schema"]
-		vim.notify("Loading RLDX catalog using schema v" .. ver, "debug")
 	else
 		ver = "0.0.2"
-		vim.notify("Loading RLDX catalog using schema v0.0.2")
 	end
 
 	if ver == "0.0.2" then
@@ -59,7 +58,7 @@ function M.load_contacts(filepath, create)
 		return {}
 	end
 
-	vim.notify("Loaded " .. #catalog .. " RLDX contacts", "debug")
+	vim.notify("Loaded " .. #catalog .. " RLDX contacts using catalog v" .. ver, "trace")
 	return catalog
 end
 
