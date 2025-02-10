@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local h = require("rldx.extras.md5")
 
 local M = {}
 
@@ -13,7 +14,7 @@ function M.to_completions(data)
 		table.insert(
 			output,
 			{
-				label = name,
+				label = value.name,
 				kind = cmp.lsp.CompletionItemKind.Text,
 			}
 		)
@@ -24,8 +25,7 @@ end
 function M.from_completions(data)
 	local contacts = {}
 	for _, entry in ipairs(data) do
-		-- TODO: Key should be hash
-		contacts[entry.label] = {
+		contacts["md5::" .. h.sumhexa(entry.label)] = {
 			name = entry.label,
 			metadata = {
 				-- TODO: Update to chosen encryption
