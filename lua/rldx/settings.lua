@@ -14,7 +14,6 @@ M.defaults = {
 	highlight_bold = true,
 	schema_ver = "latest",
 	encryption = "elementwise_xor", -- Options: xor, <more to come>
-	dotenv_file = "./.env"
 }
 
 function M.resolve_opts(options)
