@@ -215,6 +215,7 @@ Otherwise, if `opts.schema_ver` is set to `0.0.2`, then:
 ### Unencrypted Catalog
 In this example, let's assume the user has the following catalog:
 ```lua
+-- Schema Version 0.1.0
 {
 	"header" = {
 		"rldx_schema" = "0.1.0"
@@ -241,6 +242,7 @@ Otherwise, if `opts.schema_ver` is set to `0.1.0` or `latest`, then:
 ### Encrypted Catalog
 In this example, let's assume the user has the following catalog:
 ```lua
+-- Schema Version 0.1.0
 {
 	"header" = {
 		"rldx_schema" = "0.1.0"
