@@ -263,7 +263,7 @@ Similar to earlier, if `opts.schema_ver` is set to `0.0.2` then a schema DOWNGRA
 
 Otherwise, if `opts.schema_ver` is set to `0.1.0` or `latest`, then:
 - RLDX will read and write the catalog using the v0.1.0 schema.
-- If `opts.encryption` is set to `elementwise_xor` and `RLDX_ENCRYPTION_KEY` is set. Then, upon write, the catalog entries will be lightly encrypted.
+- If `opts.encryption` is set to `elementwise_xor` and `RLDX_ENCRYPTION_KEY` is set. Then, upon write, the catalog entries will be obfuscated.
 - If `opts.encryption` is set to `plaintext`, then the `name` attribute of each contact will remain as plaintext.
 
 # Roadmap
