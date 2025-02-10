@@ -22,7 +22,7 @@ function M.setup_highlight(color, bold)
 		bold =bold, 
 	})
 
-	vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+	vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		pattern = "*",
 		callback = function()
 			vim.cmd [[
@@ -38,7 +38,7 @@ function M.setup(options)
 	os.execute("mkdir -p " .. M.getPath(sett.options.filename))
 	os.execute("touch " .. sett.options.filename)
 
-	if sett.options.highlight_enabled then
+	if sett.options.highlight_enabled == true then
 		M.setup_highlight(
 			sett.options.highlight_color,
 			sett.options.highlight_bold
