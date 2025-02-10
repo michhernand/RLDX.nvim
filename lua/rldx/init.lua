@@ -39,10 +39,14 @@ function M.setup(options)
 
 	local nilkey = sett.session.encryption_key == nil
 	local emptykey = sett.session.encryption_key == ""
+	local plaintext = sett.session.encryption == "plaintext"
+
 	if nilkey then
-		vim.notify("RLDX_ENCRYPTION_KEY env var missing", "warn")
 		sett.session.encryption_key = ""
-	elseif emptykey then
+		if plaintext == false then
+			vim.notify("RLDX_ENCRYPTION_KEY env var missing", "warn")
+		end
+	elseif emptykey and (plaintext == false) then
 		vim.notify("RLDX_ENCRYPTION_KEY env var missing", "warn")
 	end
 
