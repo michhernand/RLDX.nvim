@@ -1,6 +1,3 @@
-local dotenv = require("rldx.extras.dotenv")
-
-
 local M = {}
 
 M.options = {}
