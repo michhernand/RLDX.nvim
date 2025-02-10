@@ -46,6 +46,9 @@ lazy configuration for all file types.
     "michhernand/RLDX.nvim",
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+        "hrsh7th/nvim-cmp",
+    },
     opts = {} -- see configuration docs for details
 }
 ```
@@ -60,8 +63,8 @@ lazy configuration for select file types.
         "BufReadPost *.md", "BufNewFile *.md",
     },
     dependencies = {
-        "user-none/lua-hashings",
-    }
+        "hrsh7th/nvim-cmp",
+    },
     opts = {} -- see configuration docs for details
 }
 ```
@@ -77,7 +80,8 @@ opts = {
     filename = os.getenv("HOME") .. "/.rolodex/db.json"),
     highlight_enabled = true,
     highlight_color = "00ffff",
-    highlight_bold = true
+    highlight_bold = true,
+    encryption = "elementwise_xor",
 }
 ```
 
@@ -96,6 +100,11 @@ opts = {
 
 ### Highlight Bold
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
+
+## encryption
+`encryption` (str) is the chosen encryption methodology. Options include:
+- `plaintext`: No encryption of fields.
+- `elementwise_xor`: xor encryption of each contact.
 
 ## [Optional] Formatting for nvim-cmp
 An optional feature is to add formatting for nvim-cmp to display the type and source of the completion.
@@ -168,8 +177,10 @@ return {
 ![Demo for Adding Contacts](./repo/demo2.gif)
 
 # Roadmap
+- [ ] Encryption
 - [ ] Delete contacts.
 - [ ] Update contacts.
+- [ ] Blink.nvim compatability.
 - [ ] Grep files by contact name.
 
 # Known Issues
@@ -183,6 +194,4 @@ This appears to happen when a new org-roam file is created via org-roam-capture.
 - Only highlighting is affected here. Other functionality is unaffected.
 
 # Acknowledgements
-- JSON read / write functionality is provided by [json.lua](https://github.com/rxi/json.lua?tab=readme-ov-file).
-- lua/lua-nums is provided by [lua-nums](https://github.com/user-none/lua-nums)
-- lua/lua-hashings is provided by [lua-hashings](https://github.com/user-none/lua-hashings)
+- md5.lua is provided by [md5](https://github.com/kikito/md5.lua)

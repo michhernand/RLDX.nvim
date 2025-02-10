@@ -9,7 +9,7 @@ M.defaults = {
 	highlight_color = "#00ffff",
 	highlight_bold = true,
 	schema_ver = "latest",
-	encryption = "xor", -- Options: xor, <more to come>
+	encryption = "elementwise_xor", -- Options: xor, <more to come>
 }
 
 function M.resolve_opts(options)
