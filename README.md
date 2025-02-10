@@ -250,7 +250,7 @@ In this example, let's assume the user has the following catalog:
 		"md5::6249d49c40f102ed53ba5e680d016085": {
 			"name": "04101a11171343130911061c1514081b",
 			"metadata": {
-				"encryption": "plaintext"
+				"encryption": "elementwise_xor"
 			}
 		},
 	}
