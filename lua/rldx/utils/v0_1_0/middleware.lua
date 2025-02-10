@@ -9,12 +9,12 @@ function M.to_completions(data)
 		error("data with schema ver 1.1.0 is missing 'contacts' key")
 	end
 
-	for _, entry in ipairs(data["contacts"]) do
+	for name, value in pairs(data.contacts) do
 		table.insert(
 			output,
 			{
-				label = entry.name,
-				kind = cmp.lsp.CompletionItemKind.Text
+				label = name,
+				kind = cmp.lsp.CompletionItemKind.Text,
 			}
 		)
 	end
@@ -22,13 +22,6 @@ function M.to_completions(data)
 end
 
 function M.from_completions(data)
-	local output = {
-		header = {
-			rldx_schema = "0.1.0"
-		},
-		contacts = {}
-	}
-
 	local contacts = {}
 	for _, entry in ipairs(data) do
 		-- TODO: Key should be hash
@@ -40,7 +33,13 @@ function M.from_completions(data)
 			}
 		}
 	end
-	return output
+
+	return {
+		header = {
+			rldx_schema = "0.1.0"
+		},
+		contacts = contacts,
+	}
 end
 
 return M
