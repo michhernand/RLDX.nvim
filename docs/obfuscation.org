@@ -2,5 +2,6 @@
 
 Obfuscation is provided in releases `>=0.1.0`.
 
-<b style="color:red;">This is bold and red</b>
-
+⛔️ *NOTE: Obfuscation is not a high-security feature.* It is meant to provide a small level of privacy for stored data.
+	- The hashing algorithm used is weak.
+	- The level of encryption used is weak.
