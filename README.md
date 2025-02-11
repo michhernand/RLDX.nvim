@@ -126,7 +126,7 @@ opts = {
 - `plaintext`: No encryption of fields.
 - `elementwise_xor` (only available for schema_ver >= '0.1.0'): xor encryption of each contact.
 
-## ⛔️[Optional] Formatting for nvim-cmp
+## [Optional] Formatting for nvim-cmp
 An optional feature is to add formatting for nvim-cmp to display the type and source of the completion.
 
 ```lua
@@ -190,14 +190,14 @@ return {
 }
 ```
 
-# Usage
+# 🖋️ Usage
 ## Autocomplete
 ![Demo for Autocomplete](./repo/demo3.gif)
 ## Adding Contacts
 ![Demo for Adding Contacts](./repo/demo2.gif)
 
-# Obfuscation
-RLDX provides obfuscation of data at rest. RLDX or its maintainers make no guarantees around security. For a full breakdown of obfuscation, see the [Obfuscation Doc](./docs/obfuscation.org).
+# 🔒 Obfuscation
+RLDX optionally provides obfuscation of data at rest. RLDX and its maintainers make no guarantees around security. For a full breakdown of obfuscation, see the [Obfuscation Doc](./docs/obfuscation.org).
 
 ## What Is Obfuscation?
 - In `schema_ver` >= 0.1.0, RLDX provides:
@@ -205,7 +205,7 @@ RLDX provides obfuscation of data at rest. RLDX or its maintainers make no guara
     - Hashing of names to guarantee uniqueness.
 - To enable obfuscation, see the instructions in [Obfusfaction Doc](./docs/obfuscation.org)
 
-# Roadmap
+# 🚘 Roadmap
 - [X] ~~Obfuscation~~
 - [ ] Form for adding contacts
 - [ ] Allow saving all contacts
@@ -216,7 +216,7 @@ RLDX provides obfuscation of data at rest. RLDX or its maintainers make no guara
 - [ ] Blink.nvim compatability
 - [ ] Grep files by contact name
 
-# Known Issues
+# 🦗 Known Issues
 ## [RESOLVED in v0.1.0] Shows duplicate autocomplete recommendations.
 This appears to happen when you add contacts and then query them in the same session. A workaround is to exit and re-launch Neovim.
 ## [RESOLVED in v0.1.0] Highlighting does not initialize on lazy loading.
@@ -226,6 +226,6 @@ This appears to happen when lazy loading with Lazy.nvim. A workaround is to set 
 This appears to happen when a new org-roam file is created via org-roam-capture. This resolves when Neovim is restarted.
 - Only highlighting is affected here. Other functionality is unaffected.
 
-# Acknowledgements
+# 🏆 Acknowledgements
 - md5.lua is provided by [md5](https://github.com/kikito/md5.lua)
 - xor.lua is provided by [xor](https://github.com/Braayy/xor-lua)
