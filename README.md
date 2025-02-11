@@ -267,11 +267,14 @@ Otherwise, if `opts.schema_ver` is set to `0.1.0` or `latest`, then:
 - If `opts.encryption` is set to `plaintext`, then the `name` attribute of each contact will remain as plaintext.
 
 # Roadmap
-- [X] Light encryption
-- [ ] Delete contacts.
-- [ ] Update contacts.
-- [ ] Blink.nvim compatability.
-- [ ] Grep files by contact name.
+- [X] ~~Obfuscation~~
+- [ ] Form for adding contacts
+- [ ] Allow saving all contacts
+- [ ] Allow loading all contacts
+- [ ] Allow deleting contacts
+- [ ] Allow updating contacts
+- [ ] Blink.nvim compatability
+- [ ] Grep files by contact name
 
 # Known Issues
 ## Shows duplicate autocomplete recommendations.
