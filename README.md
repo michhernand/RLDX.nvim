@@ -98,7 +98,7 @@ opts = {
     highlight_color = "00ffff",
     highlight_bold = true,
     schema_ver = "latest",
-    encryption = "elementwise_xor",
+    encryption = "plaintext",
 }
 ```
 
