@@ -9,7 +9,7 @@ Obfuscation is provided in releases ~>=0.1.0~.
 	- The level of encryption used is weak.
 - RLDX has no way of recovering your catalog if you lose your encryption key.
 
-** 💡 Features
+** Features
 /Catalog Without Obfuscation/
 #+BEGIN_SRC json
 {
@@ -44,7 +44,7 @@ Obfuscation is provided in releases ~>=0.1.0~.
 }
 #+END_SRC
 
-** 🔧 Setup
+** Setup
 :PROPERTIES:
 :CUSTOM_ID: setup
 :END:
@@ -64,7 +64,7 @@ return {
 #+END_SRC
 3. Open Neovim and add a contact using ~:RldxAdd <contact.name>~. RLDX will overwrite the existing catalog with the encrypted version.
 
-** 🔑 Add / Removing Obfuscation
+** Add / Removing Obfuscation
 *** Adding Obfuscation
 :PROPERTIES:
 :CUSTOM_ID: adding_obfuscation
@@ -82,7 +82,7 @@ return {
 	2. Update your ~RLDX_ENCRYPTION_KEY~ environment variable.
 	3. Follow the [[#adding_obfuscation][Adding Obfuscation]] steps.
 
-** ⬇️ Downgrading to v0.0.2
+** Downgrading to v0.0.2
 	1. Follow the [[#removing_obfuscation][Removing Obfuscation]] steps.
 	2. Set ~opts.schema_ver~ to ~0.0.2~.
 	3. Open Neovim and add a contact using ~:RldxAdd <contact.name>~. RLDX will overwrite the existing catalog with the downgraded version.
