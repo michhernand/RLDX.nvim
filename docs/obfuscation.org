@@ -2,6 +2,57 @@
 
 Obfuscation is provided in releases `>=0.1.0`.
 
-⛔️ *NOTE: Obfuscation is not a high-security feature.* It is meant to provide a small level of privacy for stored data.
+** ⛔️ Notices
+- *Obfuscation is not a high-security feature.* It is meant to provide a small level of privacy for stored data.
 	- The hashing algorithm used is weak.
 	- The level of encryption used is weak.
+- RLDX has no way of recovering your catalog if you lose your encryption key.
+
+** 💡 Features
+/Catalog Without Obfuscation/
+#+BEGIN_SRC json
+{
+  "contacts": {
+    "md5::a9c78279740ea117100ff82782a974ae": {
+      "name": "boba.fett",
+      "metadata": {
+        "encryption": "plaintext"
+      }
+    }
+  },
+  "header": {
+    "rldx_schema": "0.1.0"
+  }
+}
+#+END_SRC
+
+/Catalog With Obfuscation/
+#+BEGIN_SRC json
+{
+  "contacts": {
+    "md5::a9c78279740ea117100ff82782a974ae": {
+      "name": "160A11155A03160000",
+      "metadata": {
+        "encryption": "elementwise_xor"
+      }
+    }
+  },
+  "header": {
+    "rldx_schema": "0.1.0"
+  }
+}
+#+END_SRC
+
+** 🔧 Setup
+1. Create an encryption key and store it in the `RLDX_ENCRYPTION_KEY` environment variable.
+2. In `opts` for RLDX set `encryption = "elementwise_xor"`.
+#+BEGIN_SRC lua
+return {
+	"michhernand/RLDX.nvim",
+	event = "VeryLazy",
+	opts = {
+		encryption = "elementwise_xor"
+	} 
+}
+#+END_SRC
+3. Open Neovim and add a contact using `:RldxAdd <contact.name>`. RLDX will overwrite the existing catalog with the encrypted version.
