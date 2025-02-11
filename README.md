@@ -34,6 +34,9 @@
 }
 ```
 
+### Other Package Managers Coming Soon
+...
+
 ## Completions Engine Configuration
 ### nvim-cmp
 #### [Required] Core Configuration
@@ -84,9 +87,6 @@ return {
     end
 }
 ```
-
-### Other Package Managers Coming Soon
-...
 
 # Configuration
 ## Default Configuration
