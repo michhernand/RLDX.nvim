@@ -6,8 +6,9 @@
 1. Review the [Known Issues](#known-issues) to find a workaround.
 2. If the issue is new then create a [Github issue](https://github.com/michhernand/RLDX.nvim/issues).
 
-# Features
+# 🎷 Features
 - Autocomplete for your contact list.
+- At-rest obfuscation of contact list.
 - Syntax highlighting for contacts.
 ![Demo1](./repo/demo1.gif)
 
@@ -18,7 +19,24 @@
 # Installation
 1. Add to your Neovim package manager's configuration. See specific steps below.
 2. Update your cmp-nvim configuration.
+3. [Optional] Update your cmp-nvim `formatting` configuration.
 
+## Package Managers
+### Lazy
+```lua
+{
+    "michhernand/RLDX.nvim",
+    event = "VeryLazy",
+    dependencies = {
+        "hrsh7th/nvim-cmp",
+    },
+    opts = {} -- see configuration docs for details
+}
+```
+
+## Completions Engine Configuration
+### nvim-cmp
+#### [Required] Core Configuration
 nvim-cmp configuration for all file types.
 ```lua
 require('cmp').setup({
@@ -38,29 +56,32 @@ require('cmp').setup.filetype('org', {
 
 ```
 
-## Package Managers
-### Lazy
-lazy configuration for all file types.
-```lua
-{
-    "michhernand/RLDX.nvim",
-    event = "VeryLazy",
-    dependencies = {
-        "hrsh7th/nvim-cmp",
-    },
-    opts = {} -- see configuration docs for details
-}
-```
 
-lazy configuration for select file types.
+#### [Optional] Formatting
+An optional feature is to add formatting for nvim-cmp to display the type and source of the completion.
+
+_A completion without formatting applied._
+![Completion Without Formatting](./repo/Completion_Without_Formatting.png)
+
+_A completion with formatting applied._
+![Completion With Formatting](./repo/Completion_With_Formatting.png)
+
 ```lua
-{
-    "michhernand/RLDX.nvim",
-    event = "VeryLazy",
-    dependencies = {
-        "hrsh7th/nvim-cmp",
-    },
-    opts = {} -- see configuration docs for details
+-- nvim-cmp.lua
+
+return {
+    "hrsh7th/nvim-cmp",
+    config = function()
+        formatting = {
+            format = function(entry, vim_item)
+                if entry.source.name = "cmp_rolodex" then
+                    vim_item.kind = "📇 Contact"
+                    vim_item.menu = "[RLDX]"
+                end
+                return vim_item
+            end
+        }
+    end
 }
 ```
 
@@ -273,6 +294,7 @@ Otherwise, if `opts.schema_ver` is set to `0.1.0` or `latest`, then:
 - [ ] Allow loading all contacts
 - [ ] Allow deleting contacts
 - [ ] Allow updating contacts
+- [ ] Allow showing of contact details
 - [ ] Blink.nvim compatability
 - [ ] Grep files by contact name
 
