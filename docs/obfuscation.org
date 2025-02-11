@@ -7,6 +7,7 @@ Obfuscation is provided in releases ~>=0.1.0~.
 - *Obfuscation is not a high-security feature.* It is meant to provide a small level of privacy for stored data.
 	- The hashing algorithm used is weak.
 	- The level of encryption used is weak.
+- RLDX does **not** provide any guarantees around security or encryption. If you want a more secure setup, then it's recommended to manually encrypt your catalog file using another tool.
 - RLDX has no way of recovering your catalog if you lose your encryption key.
 
 ** Features
