@@ -1,0 +1,6 @@
+* Obfuscation
+
+Obfuscation is provided in releases `>=0.1.0`.
+
+<b style="color:red;">This is bold and red</b>
+
