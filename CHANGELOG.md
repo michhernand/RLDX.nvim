@@ -3,6 +3,8 @@
 ## v0.1.0 - Obfuscation Release
 ### Features
 - Added optional obfuscation (via XOR encryption) of catalog.
+    - Obfuscation is removed for Neovim.
+    - Obfuscation provides a small level of security for your data.
 - Added md5 hash of name as catalog key - to guarantee uniqueness.
 - Added optional formatting of completions.
 - Updated schema version to v0.1.0.
