@@ -69,6 +69,7 @@ _A completion without formatting applied._
 _A completion with formatting applied._
 ![Completion With Formatting](./repo/Completion_With_Formatting.png)
 
+This is enabled by setting `formatting` in the `config` function for `hrsh7th/nvim-cmp`.
 ```lua
 -- nvim-cmp.lua
 
