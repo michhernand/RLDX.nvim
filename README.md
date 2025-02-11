@@ -277,9 +277,9 @@ Otherwise, if `opts.schema_ver` is set to `0.1.0` or `latest`, then:
 - [ ] Grep files by contact name
 
 # Known Issues
-## Shows duplicate autocomplete recommendations.
+## [RESOLVED in v0.1.0] Shows duplicate autocomplete recommendations.
 This appears to happen when you add contacts and then query them in the same session. A workaround is to exit and re-launch Neovim.
-## Highlighting does not initialize on lazy loading.
+## [RESOLVED in v0.1.0] Highlighting does not initialize on lazy loading.
 This appears to happen when lazy loading with Lazy.nvim. A workaround is to set `lazy = false` in opts.
 - Only highlighting is affected here. Other functionality is unaffected.
 ## Highlighting does not intiialize some org-roam files.
