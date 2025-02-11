@@ -122,10 +122,12 @@ opts = {
 ## Schema Version
 `schema_ver` (string) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2' or '0.1.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest backwards-compatible schema.
 
-## Encryption
+## Obfuscation
 `encryption` (str) is the chosen encryption methodology. Options include:
 - `plaintext`: No encryption of fields.
 - `elementwise_xor` (only available for schema_ver >= '0.1.0'): xor encryption of each contact.
+
+For more information about Obfuscation, see [Obfuscation Doc](./docs/obfuscation.org)
 
 # 🖋️ Usage
 ## Autocomplete
