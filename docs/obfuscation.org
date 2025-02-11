@@ -1,6 +1,7 @@
+#+OPTIONS: H:9 ^:nil
 * Obfuscation
 
-Obfuscation is provided in releases `>=0.1.0`.
+Obfuscation is provided in releases ~>=0.1.0~.
 
 ** ⛔️ Notices
 - *Obfuscation is not a high-security feature.* It is meant to provide a small level of privacy for stored data.
