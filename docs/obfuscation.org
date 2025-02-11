@@ -44,15 +44,35 @@ Obfuscation is provided in releases `>=0.1.0`.
 #+END_SRC
 
 ** 🔧 Setup
-1. Create an encryption key and store it in the `RLDX_ENCRYPTION_KEY` environment variable.
-2. In `opts` for RLDX set `encryption = "elementwise_xor"`.
+*Note* If you are on schema ~v0.0.2~, this will automatically upgrade you to schema ~v0.1.0~.
+
+1. Create an encryption key and store it in the ~RLDX_ENCRYPTION_KEY~ environment variable.
+2. Set ~opts.schema_ver~ to ~latest~ and ~opts.encryption~ to ~elementwise_xor~.
 #+BEGIN_SRC lua
 return {
 	"michhernand/RLDX.nvim",
 	event = "VeryLazy",
 	opts = {
-		encryption = "elementwise_xor"
+		encryption = "elementwise_xor",
+		schema_ver = "latest"
 	} 
 }
 #+END_SRC
-3. Open Neovim and add a contact using `:RldxAdd <contact.name>`. RLDX will overwrite the existing catalog with the encrypted version.
+3. Open Neovim and add a contact using ~:RldxAdd <contact.name>~. RLDX will overwrite the existing catalog with the encrypted version.
+
+** 🔑 Add / Removing Obfuscation
+*** Adding Obfuscation
+	1. Simply follow the steps of the [[Setup]] section.
+*** Removing Obfuscation
+	1. Simply follow the steps of the [[Setup]] section.
+	2. In step ~2~, set ~opts.encryption~ to ~plaintext~.
+	3. Complete the remaining steps of the [[Setup]] section.
+*** Changing Encryption Key
+	1. Follow the [[Removing Obfuscation]] steps.
+	2. Update your ~RLDX_ENCRYPTION_KEY~ environment variable.
+	3. Follow the [[Adding Obfuscation]] steps.
+
+** ⬇️ Downgrading to v0.0.2
+	1. Follow the [[Removing Obfuscation]] steps.
+	2. Set ~opts.schema_ver~ to ~0.0.2~.
+	3. Open Neovim and add a contact using ~:RldxAdd <contact.name>~. RLDX will overwrite the existing catalog with the downgraded version.
