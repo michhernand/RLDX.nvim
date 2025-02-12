@@ -36,8 +36,16 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 }
 ```
 
-### Other Package Managers Coming Soon
-...
+### Packer
+```lua
+use {
+    "michhernand/RLDX.nvim", 
+    requires = { "hrsh7th/nvim-cmp" },
+    config = function()
+        require("rldx").setup{} -- see configuration docs for details
+    end
+}
+```
 
 ## Completions Engine Configuration
 ### nvim-cmp
