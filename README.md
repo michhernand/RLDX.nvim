@@ -10,6 +10,8 @@
 - Autocomplete for your contact list.
 - At-rest obfuscation of contact list.
 - Syntax highlighting for contacts.
+
+_Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 ![Demo1](./repo/demo1.gif)
 
 # 📎 Requirements
