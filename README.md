@@ -89,6 +89,8 @@ return {
 }
 ```
 
+For more details on formatting setup, see the [Formatting Doc](./docs/formatting.org).
+
 # ⚙️ Configuration
 ## Default Configuration
 ```lua
@@ -120,25 +122,25 @@ opts = {
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
 ## Schema Version
-`schema_ver` (string) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2' or '0.1.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest backwards-compatible schema.
+`schema_ver` (string) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2' or '0.1.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest schema.
 
 ## Obfuscation
 `encryption` (str) is the chosen encryption methodology. Options include:
 - `plaintext`: No encryption of fields.
-- `elementwise_xor` (only available for schema_ver >= '0.1.0'): xor encryption of each contact.
+- `elementwise_xor` (only available for `schema_ver >= '0.1.0'`): xor encryption of each contact.
 
-For more information about Obfuscation, see [Obfuscation Doc](./docs/obfuscation.org)
+For more information about Obfuscation, see the [Obfuscation Doc](./docs/obfuscation.org)
 
 # 🖋️ Usage
-## Autocomplete
-![Demo for Autocomplete](./repo/demo3.gif)
-## Adding Contacts
+## Autocompleting and Storing Contacts
 ![Demo for Adding Contacts](./repo/demo2.gif)
 
-# 🔒 Obfuscation
+## 🔒 Obfuscation
 RLDX optionally provides obfuscation of data at rest. RLDX and its maintainers make no guarantees around security. For a full breakdown of obfuscation, see the [Obfuscation Doc](./docs/obfuscation.org).
 
-## What Is Obfuscation?
+![Demo for Obfuscation](./repo/demo3.gif)
+
+### What Is Obfuscation?
 - In `schema_ver` >= 0.1.0, RLDX provides:
     - **Very** light encryption of names.
     - Hashing of names to guarantee uniqueness.
