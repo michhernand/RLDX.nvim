@@ -133,11 +133,13 @@ For more information about Obfuscation, see the [Obfuscation Doc](./docs/obfusca
 
 # 🖋️ Usage
 ## Autocompleting and Storing Contacts
+_Left: Neovim Editor, Right: At-Rest Plaintext Catalog_
 ![Demo for Adding Contacts](./repo/demo2.gif)
 
 ## 🔒 Obfuscation
 RLDX optionally provides obfuscation of data at rest. RLDX and its maintainers make no guarantees around security. For a full breakdown of obfuscation, see the [Obfuscation Doc](./docs/obfuscation.org).
 
+_Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 ![Demo for Obfuscation](./repo/demo3.gif)
 
 ### What Is Obfuscation?
