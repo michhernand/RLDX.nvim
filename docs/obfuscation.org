@@ -11,6 +11,8 @@ Obfuscation is provided in releases ~>=0.1.0~.
 - RLDX has no way of recovering your catalog if you lose your encryption key.
 
 ** Features
+Obfuscation hides contact details using XOR encryption and MD5 hashing.
+
 /Catalog Without Obfuscation/
 #+BEGIN_SRC json
 {
