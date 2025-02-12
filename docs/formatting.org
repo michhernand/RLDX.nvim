@@ -4,9 +4,11 @@
 Formatting provides additional details in ~cmp~ recommendations.
 
 /Completion Without Formatting/
+
 [[../repo/Completion_Without_Formatting.png]]
 
 /Completion With Formatting/
+
 [[../repo/Completion_With_Formatting.png]]
 
 ** Setup
