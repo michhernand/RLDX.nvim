@@ -1,23 +1,4 @@
-
 local M = {}
-
-M.options = {}
-
-M.defaults = {
-	prefix_char = "@",
-	db_filename = os.getenv("HOME") .. "/.rolodex/db.json",
-	highlight_enabled = true,
-	highlight_color = "#00ffff",
-	highlight_bold = true,
-}
-
-function M.resolve_opts(options)
-	M.options = vim.tbl_deep_extend(
-		"force",
-		{}, M.defaults,
-		options or {}
-	)
-end
 
 function M.file_exists(filepath)
 	if filepath == nil then error("file exists received invalid argument") end
@@ -32,7 +13,7 @@ end
 
 function M.write_json_file(filepath, data)
 	if filepath == nil then 
-		return false, "rolodex.nvim cannot find json db"
+		return false, "rldx.nvim cannot find json db"
 	end
 
 	local json_str = vim.fn.json_encode(data)
@@ -44,7 +25,10 @@ function M.write_json_file(filepath, data)
 end
 
 function M.read_json_file(filepath, create)
-	if filepath == nil then return {}, "rolodex.nvim cannot find json db", "warn" end
+	if filepath == nil then 
+		return {}, "rldx.nvim cannot find json db"
+	end
+
 	if (M.file_exists(filepath) == false) and (create == true) then
 		M.write_json_file(filepath, {})
 	end
@@ -55,16 +39,11 @@ function M.read_json_file(filepath, create)
 
 	local json_str = table.concat(content, "\n")
 	local ok, result = pcall(vim.fn.json_decode, json_str)
-	if not ok then return {}, "rolodex.nvim failed to parse contact json", "warn" end
+
+	if not ok then 
+		return {}, "rldx.nvim failed to parse contact json"
+	end
+
 	return result, nil
 end
-
-function M.sort(data)
-	table.sort(data, function(a, b)
-		return a.count > b.count
-	end)
-	return data
-end
-
 return M
-

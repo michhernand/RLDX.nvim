@@ -1,0 +1,78 @@
+* Formatting
+
+** Features
+Formatting provides additional details in ~cmp~ recommendations.
+
+/Completion Without Formatting/
+
+[[../repo/Completion_Without_Formatting.png]]
+
+/Completion With Formatting/
+
+[[../repo/Completion_With_Formatting.png]]
+
+** Setup
+Setup requires setting the ~formatting~ variable in the ~config()~ function for [[https://github.com/hrsh7th/nvim-cmp][nvim-cmp]].
+
+#+BEGIN_SRC lua
+-- nvim-cmp.lua
+{
+    "hrsh7th/nvim-cmp",
+    config = function()
+        formatting = {
+            format = function(entry, vim_item)
+                if entry.source.name = "cmp_rolodex" then
+                    vim_item.kind = "📇 Contact"
+                    vim_item.menu = "[RLDX]"
+                end
+                return vim_item
+            end
+        }
+    end
+}
+#+END_SRC
+
+** Integrating With Other Formatting Settings
+
+You may already have ~formatting~ configured. Possibly like...
+#+BEGIN_SRC lua
+return {
+    "hrsh7th/nvim-cmp",
+    config = function()
+        formatting = {
+            format = lspkind.cmp_format({
+            maxwidth = 50,
+                ellipsis_char = "...",
+            }),
+        }
+    end
+}
+#+END_SRC
+
+In such a case, you can merge your ~formatting~ with the RLDX ~formatting~.
+#+BEGIN_SRC lua
+   return {
+       "hrsh7th/nvim-cmp",
+       config = function()
+	   formatting = {
+		   format = function(entry, vim_item)
+
+		       -- Existing configuration
+		       local format_func = lspkind.cmp_format({
+				   maxwidth = 50,
+				   ellipsis_char = "...",
+			   })
+			   vim_item = format_func(entry, vim_item)
+
+			   -- RLDX configuration
+			   if entry.source.name == "cmp_rolodex" then
+				   vim_item.kind = "📇 Contact"
+				   vim_item.menu = "[RLDX]"
+			   end
+
+			   return vim_item
+		   end
+	   }
+       end
+   }
+#+END_SRC

@@ -1,8 +1,8 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"$id": "https://github.com/michhernand/rldx",
-	"title": "RLDX",
-	"description": "A RLDX catalog",
+	"title": "RLDX v0.1.0",
+	"description": "v0.1.0 of the RLDX Catalog",
 	"type": "object",
 
 	"properties": {
@@ -23,8 +23,7 @@
 					"metadata": {
 						"type": "object",
 						"properties": {
-							"encryption": { "type": "string" },
-							"encryption_commit": { "type": ["string", "null"] }
+							"encryption": { "type": "string" }
 						}
 					}
 				}

@@ -1,0 +1,16 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/michhernand/rldx",
+	"title": "RLDX v0.0.2",
+	"description": "v0.0.2 of the RLDX Catalog",
+	"type": "array",
+
+	"items": {
+		"type": "object",
+		"properties": {
+			"name": { "type": "string" },
+			"count": { "type": "integer" }
+		}
+	}
+
+}
