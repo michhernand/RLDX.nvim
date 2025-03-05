@@ -119,6 +119,7 @@ function M.rldx_add_cmd(opts)
 	enc_opts = {
 		encryption = sett.options.encryption,
 		key = sett.session.encryption_key,
+		hash_salt_len = sett.options.hash_salt_length,
 	}
 
 	ok, err = crud.save_contacts(

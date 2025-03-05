@@ -151,7 +151,11 @@ function M.from_completions(data, opts)
 	end
 
 	for _, entry in ipairs(data) do
-		local salt = algos.generate_salt()
+		if opts["hash_salt_len"] == nil then
+			vim.notify("failed to get hash salt length", "error")
+			abort = true
+		end
+		local salt = algos.generate_salt(opts["hash_salt_len"])
 		local hashed_name = "md5::" .. h.sumhexa(entry.label .. salt)
 		if opts["encryption"] == nil then
 			vim.notify(
