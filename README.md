@@ -160,6 +160,7 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 
 # 🚘 Roadmap
 - [X] ~~Obfuscation~~
+- [X] ~~Salt for Hashing~~
 - [ ] Form for adding contacts
 - [ ] Allow saving all contacts
 - [ ] Allow loading all contacts
