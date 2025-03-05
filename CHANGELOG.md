@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.2.0 - Hash Salt Release
+### Features
+- Added randomly generated salt for all hashes.
+- Updated schema version to v0.2.0.
+- Maintaining support for schema v0.1.0 and v0.0.2.
+
+### Fixes
+- Small syntax fix in v0.1.0 middleware.
+
 ## v0.1.0 - Obfuscation Release
 ### Features
 - Added optional obfuscation (via XOR encryption) of catalog when at rest.
@@ -8,9 +17,6 @@
 - Updated schema version to v0.1.0.
 - Maintaining support for schema v0.0.2.
 - Added automatic upgrade / downgrade of schema.
-
-### Fixes
-- TBD
 
 ## v0.0.2 - Documentation Release
 - Readme and instruction updates.
