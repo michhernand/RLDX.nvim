@@ -104,7 +104,7 @@ function M.rldx_add_cmd(opts)
 	vim.cmd('echo ""')
 
 	if name == nil or name == "" then
-		vim.notify("tried to add an invalid name", "error")
+		vim.notify("RLDX tried to add an invalid name", "error")
 		return
 	end
 
