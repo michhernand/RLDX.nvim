@@ -31,6 +31,18 @@ function M.copy_table(obj, seen)
 	return res
 end
 
+function M.generate_salt(length)
+	length = length or 16
+	local chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+	math.randomseed(os.time())
+	local salt = ""
+	for i = 1, length do
+		ix = math.random(1, #chars)
+		salt = salt .. string.sub(chars, ix, ix)
+	end
+	return salt
+end
+
 return M
 
 
