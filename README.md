@@ -32,7 +32,10 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
     dependencies = {
         "hrsh7th/nvim-cmp",
     },
-    opts = {} -- see configuration docs for details
+    opts = {}, -- see configuration docs for details
+    keys = {
+        { "<leader>Xa", "<cmd>RldxAdd<CR>" }
+    }
 }
 ```
 
@@ -43,6 +46,9 @@ use {
     requires = { "hrsh7th/nvim-cmp" },
     config = function()
         require("rldx").setup{} -- see configuration docs for details
+    end,
+        setup = function()
+        vim.keymap.set("n", "<leader>Xa", "<cmd>RldxAdd<CR>", { noremap = true, silent = true })
     end
 }
 ```
@@ -163,7 +169,7 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 # 🚘 Roadmap
 - [X] ~~Obfuscation~~
 - [X] ~~Salt for Hashing~~
-- [ ] Form for adding contacts
+- [X] ~~Form for adding contacts~~
 - [ ] Allow saving all contacts
 - [ ] Allow loading all contacts
 - [ ] Allow deleting contacts
