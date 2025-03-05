@@ -189,5 +189,5 @@ This appears to happen when a new org-roam file is created via org-roam-capture.
 - Only highlighting is affected here. Other functionality is unaffected.
 
 # 🏆 Acknowledgements
-- md5.lua is provided by [md5](https://github.com/kikito/md5.lua)
-- xor.lua is provided by [xor](https://github.com/Braayy/xor-lua)
+- md5.lua is provided by [md5](https://github.com/kikito/md5.lua) (by [kikito](https://github.com/kikito))
+- xor.lua is provided by [xor](https://github.com/Braayy/xor-lua) (by [Braayy](https://github.com/Braayy/xor-lua))
