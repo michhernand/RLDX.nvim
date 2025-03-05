@@ -140,7 +140,7 @@ opts = {
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
 ## Schema Version
-`schema_ver` (string) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2' or '0.1.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest schema.
+`schema_ver` (string) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2', '0.1.0', or '0.2.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest schema.
 
 ## Obfuscation
 `encryption` (str) is the chosen encryption methodology. Options include:
