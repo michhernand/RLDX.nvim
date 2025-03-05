@@ -74,9 +74,11 @@ require('cmp').setup.filetype('org', {
 An optional feature is to add formatting for nvim-cmp to display the type and source of the completion.
 
 _A completion without formatting applied._
+
 ![Completion Without Formatting](./repo/Completion_Without_Formatting.png)
 
 _A completion with formatting applied._
+
 ![Completion With Formatting](./repo/Completion_With_Formatting.png)
 
 This is enabled by setting `formatting` in the `config` function for `hrsh7th/nvim-cmp`.
