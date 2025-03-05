@@ -150,7 +150,7 @@ function M.from_completions(data, opts)
 	end
 
 	for _, entry in ipairs(data) do
-		hashed_name = "md5::" .. h.sumhexa(entry.label)
+		local hashed_name = "md5::" .. h.sumhexa(entry.label)
 		if opts["encryption"] == nil then
 			vim.notify(
 				"no RLDX encryption settings were provided",
