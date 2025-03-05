@@ -105,6 +105,7 @@ function M.rldx_add_cmd(opts)
 
 	if name == nil or name == "" then
 		vim.notify("tried to add an invalid name", "error")
+		return
 	end
 
 	table.insert(
