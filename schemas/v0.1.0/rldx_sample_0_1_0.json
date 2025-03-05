@@ -3,13 +3,13 @@
 		"rldx_schema": "0.1.0"
 	},
 	"contacts": {
-		"sha512::41dfee30d90e8f325ac129a1f400f2d61424a5a724154232dfcaa216697fb5b37b4709ebe8576d4b945fd0739f6e9898387341f076b469a166e4941aef462f06": {
+		"md5::6249d49c40f102ed53ba5e680d016085": {
 			"name": "04101a11171343130911061c1514081b",
 			"metadata": {
 				"encryption": "elementwise_xor"
 			}
 		},
-		"sha512::5960aff32feb8a3df2761e9ee95c4383a4edc7de3d93104cdd9b557ef9f1a660befa87a99d81fff54dd2df2d5ebc91850012066107c2932f643ff445427eec9a": {
+		"md5::6951336360e33eac6acb0f54de86f935": {
 			"name": "hermes.conrad",
 			"metadata": {
 				"encryption": "plaintext"
