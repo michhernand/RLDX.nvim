@@ -79,7 +79,7 @@ function M.setup(options)
 	vim.api.nvim_create_user_command(
 		"RldxAdd", 
 		M.rldx_add_cmd,
-		{ nargs = 1 }
+		{ nargs = 0 }
 	)
 
 	vim.api.nvim_create_user_command(
@@ -99,7 +99,13 @@ end
 
 -- Add a contact to catalog
 function M.rldx_add_cmd(opts)
-	local name = opts.args
+	local name = vim.fn.input('Enter Name: ')
+	vim.cmd('redraw')
+	vim.cmd('echo ""')
+
+	if name == nil or name == "" then
+		vim.notify("tried to add an invalid name", "error")
+	end
 
 	table.insert(
 		M.contacts, 
