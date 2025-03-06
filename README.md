@@ -16,11 +16,11 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 
 # 🖥️ Usage
 - **Autocomplete:** To trigger autocomplete, simply start a word with your `prefix_char` (defaults to `@`).
-- **Add Contact:** To add a new contact to the Contact Catalog, invoke `:RldxAdd` (deafults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
-- **Delete Contact:** To delete a contact from the Contact Catalog, invoke `:RldxDelete` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>d</kbd>).
-- **Reload Contact Catalog:** To add a new contact to the autocomplete catalog, invoke `:RldxAdd` (deafults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
+- **Add Contact:** To add a contact to the Contact Catalog, use `:RldxAdd` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
+- **Delete Contact:** To delete a contact from the Contact Catalog, use `:RldxDelete` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>d</kbd>).
+- **Reload Contact Catalog:** To reload the Contact Catalog, use `:RldxAdd` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
     - *Note: Loading occurs automatically on startup. Reload is only necessary if the Contact Catalog is updated by a process other than Neovim. In the vast majority of scenarios, this command is not needed.*
-- **Save Contact Catalog:** To save the catalog, invoke `:RldxSave` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>s</kbd>).
+- **Save Contact Catalog:** To save the Contact Catalog, use `:RldxSave` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>s</kbd>).
     - *Note: Saving occurs automatically when contacts are saved or deleted. Manually saving is useful if an error occurs with either of those processes.*
 
 
