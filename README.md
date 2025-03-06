@@ -15,22 +15,14 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 ![Demo1](./repo/demo1.gif)
 
 # 🖥️ Usage
-## Autocomplete Contact
-To trigger autocomplete, simply start a word with your `prefix_char` (defaults to `@`).
+- **Autocomplete:** To trigger autocomplete, simply start a word with your `prefix_char` (defaults to `@`).
+- **Add Contact:** To add a new contact to the autocomplete catalog, invoke `:RldxAdd` (deafults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
+- **Delete Contact:** To delete a contact from the autocomplete catalog, invoke `:RldxDelete` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>d</kbd>).
+- **Reload Contact Catalog:** To add a new contact to the autocomplete catalog, invoke `:RldxAdd` (deafults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
+    - *Note: Loading occurs automatically on startup. Reload is only necessary if the Contact Catalog is updated by a process other than Neovim. In the vast majority of scenarios, this command is not needed.*
+- **Save Contact Catalog:** To save the catalog, invoke `:RldxSave` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>s</kbd>).
+    - *Note: Saving occurs automatically when contacts are saved or deleted. Manually saving is useful if an error occurs with either of those processes.*
 
-## Add to Contact Catalog
-To add a new contact to the autocomplete catalog, invoke `:RldxAdd` (deafults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
-
-## Delete from Contact Catalog
-To delete a contact from the autocomplete catalog, invoke `:RldxDelete` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>d</kbd>).
-
-## Reload Contact Catalog
-To reload the catalog from its file, invoke `:RldxLoad` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>l</kbd>).
-
-## Manually Save Contact Catalog
-*Note: Saving occurs automatically when contacts are saved or deleted. Manually saving is useful if an error occurs with either of those processes.*
-
-To save the catalog, invoke `:RldxSave` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>s</kbd>).
 
 
 # 📎 Requirements
