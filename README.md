@@ -186,7 +186,7 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 - [X] ~~Salt for Hashing~~
 - [X] ~~Form for adding contacts~~
 - [ ] Allow saving all contacts
-- [X] Allow loading all contacts
+- [X] ~~Allow loading all contacts~~
 - [ ] Allow deleting contacts
 - [ ] Allow updating contacts
 - [ ] Allow showing of contact details
