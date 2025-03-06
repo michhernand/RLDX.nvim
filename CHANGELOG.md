@@ -1,9 +1,13 @@
 # Changelog
 
-## v0.2.0 - Hash Salt Release
+## v0.2.0 - CRUD Release
 ### Features
+- Added RldxDelete, a command that deletes a contact by name.
+- Added RldxSave, a command that manually saves the contacts catalog.
 - Added RldxLoad, a command that manually reloads the contacts catalog.
 - Added key binding for RldxAdd.
+- Added key binding for RldxDelete.
+- Added key binding for RldxSave.
 - Added key binding for RldxLoad.
 - Added randomly generated salt for all hashes.
 - Updated schema version to v0.2.0.

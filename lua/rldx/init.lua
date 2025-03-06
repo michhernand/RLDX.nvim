@@ -88,6 +88,12 @@ function M.setup(options)
 		{ nargs = 0 }
 	)
 
+	vim.api.nvim_create_user_command(
+		"RldxSave",
+		M.rldx_save_cmd,
+		{ nargs = 0 }
+	)
+
 	-- Register the Add Contact command
 	vim.api.nvim_create_user_command(
 		"RldxAdd", 
@@ -149,9 +155,31 @@ function M.rldx_delete_cmd(opts)
 	)
 
 	if ok == true then
-		vim.notify("Deleted'" .. name .. "' from Catalog")
+		vim.notify("RLDX deleted'" .. name .. "' from Catalog")
 	else
-		vim.notify("Failed to delete contact from Catalog")
+		vim.notify("RLDX failed to delete contact from Catalog")
+		return
+	end
+end
+
+function M.rldx_save_cmd(opts)
+	enc_opts = {
+		encryption = sett.options.encryption,
+		key = sett.session.encryption_key,
+		hash_salt_len = sett.options.hash_salt_length,
+	}
+
+	ok, err = crud.save_contacts(
+		sett.options.filename,
+		algos.copy_table(M.contacts),
+		sett.options.schema_ver,
+		enc_opts
+	)
+
+	if ok == true then
+		vim.notify("RLDX saved Catalog")
+	else
+		vim.notify("RLDX failed to save Catalog")
 		return
 	end
 end
@@ -189,9 +217,9 @@ function M.rldx_add_cmd(opts)
 	)
 
 	if ok == true then
-		vim.notify("Added '" .. name .. "' to Catalog")
+		vim.notify("RLDX added '" .. name .. "' to Catalog")
 	else
-		vim.notify("Failed to add contact to Catalog")
+		vim.notify("RLDX failed to add contact to Catalog")
 		return
 	end
 end

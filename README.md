@@ -22,10 +22,15 @@ To trigger autocomplete, simply start a word with your `prefix_char` (defaults t
 To add a new contact to the autocomplete catalog, invoke `:RldxAdd` (deafults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
 
 ## Delete from Contact Catalog
-To delete a contact from the autocomplete catalog, invoke `:RldxDelete` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>d</kbd>)
+To delete a contact from the autocomplete catalog, invoke `:RldxDelete` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>d</kbd>).
 
 ## Reload Contact Catalog
 To reload the catalog from its file, invoke `:RldxLoad` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>l</kbd>).
+
+## Manually Save Contact Catalog
+*Note: Saving occurs automatically when contacts are saved or deleted. Manually saving is useful if an error occurs with either of those processes.
+
+To save the catalog, invoke `:RldxSave` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>s</kbd>).
 
 
 # 📎 Requirements
@@ -190,11 +195,12 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 - [X] ~~Obfuscation~~
 - [X] ~~Salt for Hashing~~
 - [X] ~~Form for adding contacts~~
-- [ ] Allow saving all contacts
+- [X] ~~Allow saving all contacts~~
 - [X] ~~Allow loading all contacts~~
-- [ ] Allow deleting contacts
-- [ ] Allow updating contacts
-- [ ] Allow showing of contact details
+- [X] ~~Allow deleting contacts~~
+- [ ] Option to save catalog as BSON
+- [ ] Store contact key-value metadata
+- [ ] Display contact key-value metadata
 - [ ] Blink.nvim compatability
 - [ ] Grep files by contact name
 
