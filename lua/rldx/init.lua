@@ -96,6 +96,12 @@ function M.setup(options)
 	)
 
 	vim.api.nvim_create_user_command(
+		"RldxDelete",
+		M.rldx_delete_cmd,
+		{ nargs = 0 }
+	)
+
+	vim.api.nvim_create_user_command(
 		"RldxList",
 		M.rldx_list_cmd,
 		{ nargs = 0 }
@@ -110,9 +116,49 @@ function M.rldx_list_cmd(opts)
 	vim.notify(vim.inspect(M.contacts))
 end
 
+function M.rldx_delete_cmd(opts)
+	local name = vim.fn.input('[DELETE] Enter Name: ')
+	vim.cmd('redraw')
+	vim.cmd('echo ""')
+
+	if name == nil or name == "" then
+		vim.notify("RLDX tried to delete an invalid name", "error")
+		return
+	end
+
+	local filtered_contacts = {}
+	for _, contact in ipairs(M.contacts) do
+		if contact.label ~= name then
+			table.insert(filtered_contacts, contact)
+		end
+	end
+	M.contacts = filtered_contacts
+
+
+	enc_opts = {
+		encryption = sett.options.encryption,
+		key = sett.session.encryption_key,
+		hash_salt_len = sett.options.hash_salt_length,
+	}
+
+	ok, err = crud.save_contacts(
+		sett.options.filename,
+		algos.copy_table(M.contacts),
+		sett.options.schema_ver,
+		enc_opts
+	)
+
+	if ok == true then
+		vim.notify("Deleted'" .. name .. "' from Catalog")
+	else
+		vim.notify("Failed to delete contact from Catalog")
+		return
+	end
+end
+
 -- Add a contact to catalog
 function M.rldx_add_cmd(opts)
-	local name = vim.fn.input('Enter Name: ')
+	local name = vim.fn.input('[ADD] Enter Name: ')
 	vim.cmd('redraw')
 	vim.cmd('echo ""')
 
