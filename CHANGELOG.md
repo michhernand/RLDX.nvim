@@ -2,6 +2,9 @@
 
 ## v0.2.0 - Hash Salt Release
 ### Features
+- Added RldxLoad, a command that manually reloads the contacts catalog.
+- Added key binding for RldxAdd.
+- Added key binding for RldxLoad.
 - Added randomly generated salt for all hashes.
 - Updated schema version to v0.2.0.
 - Maintaining support for schema v0.1.0 and v0.0.2.
