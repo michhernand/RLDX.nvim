@@ -28,7 +28,7 @@ To delete a contact from the autocomplete catalog, invoke `:RldxDelete` (default
 To reload the catalog from its file, invoke `:RldxLoad` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>l</kbd>).
 
 ## Manually Save Contact Catalog
-*Note: Saving occurs automatically when contacts are saved or deleted. Manually saving is useful if an error occurs with either of those processes.
+*Note: Saving occurs automatically when contacts are saved or deleted. Manually saving is useful if an error occurs with either of those processes.*
 
 To save the catalog, invoke `:RldxSave` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>s</kbd>).
 
