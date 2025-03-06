@@ -14,6 +14,16 @@
 _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 ![Demo1](./repo/demo1.gif)
 
+# 🖥️ Usage
+## Autocomplete Contact
+To trigger autocomplete, simply start a word with your `prefix_char` (defaults to `@`).
+
+## Add to Contact Catalog
+To add a new contact to the autocomplete catalog, invoke `:RldxAdd` (deafults to <kbd>X</kbd> <kbd>a</kbd>).
+
+## Reload Contact Catalog
+To reload the catalog from its file, invoke `:RldxLoad` (defaults to <kbd>X</kbd> <kbd>l</kbd>).
+
 # 📎 Requirements
 - Tested on Neovim 0.10.0.
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
@@ -34,7 +44,8 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
     },
     opts = {}, -- see configuration docs for details
     keys = {
-        { "<leader>Xa", "<cmd>RldxAdd<CR>" }
+        { "<leader>Xa", "<cmd>RldxAdd<CR>" },
+        { "<leader>Xl", "<cmd>RldxLoad<CR>" },
     }
 }
 ```
@@ -49,6 +60,7 @@ use {
     end,
         setup = function()
         vim.keymap.set("n", "<leader>Xa", "<cmd>RldxAdd<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>Xl", "<cmd>RldxLoad<CR>", { noremap = true, silent = true })
     end
 }
 ```
@@ -140,12 +152,15 @@ opts = {
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
 ## Schema Version
-`schema_ver` (string) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2', '0.1.0', or '0.2.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest schema.
+`schema_ver` (str) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2', '0.1.0', or '0.2.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest schema.
 
 ## Obfuscation
-`encryption` (str) is the chosen encryption methodology. Options include:
-- `plaintext`: No encryption of fields.
-- `elementwise_xor` (only available for `schema_ver >= '0.1.0'`): xor encryption of each contact.
+### Encryption
+- `encryption` (str) is the chosen encryption methodology. Options include:
+    - `plaintext`: No encryption of fields.
+    - `elementwise_xor` (only available for `schema_ver >= '0.1.0'`): xor encryption of each contact.
+### Hash Salt Length
+`hash_salt_length` (str) is the number of random salt characters added to the hash.
 
 For more information about Obfuscation, see the [Obfuscation Doc](./docs/obfuscation.org)
 
@@ -171,7 +186,7 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 - [X] ~~Salt for Hashing~~
 - [X] ~~Form for adding contacts~~
 - [ ] Allow saving all contacts
-- [ ] Allow loading all contacts
+- [X] Allow loading all contacts
 - [ ] Allow deleting contacts
 - [ ] Allow updating contacts
 - [ ] Allow showing of contact details

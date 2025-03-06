@@ -65,15 +65,28 @@ function M.setup(options)
 		key = sett.session.encryption_key,
 	}
 
-	-- Load Contacts Database
-	M.contacts, err = crud.load_contacts(
-		sett.options.filename,
-		true,
-		enc_opts
-	)
+	-- Load the catalog
+	function M.rldx_load_cmd()
+		M.contacts, err = crud.load_contacts(
+			sett.options.filename,
+			true,
+			enc_opts
+		)
+		if err ~= nil then
+			vim.notify("RLDX failed to load contacts", "error")
+			return
+		end
+	end
+	M.rldx_load_cmd()
 
 	-- Register the Source with nvim-cmp
 	cmp.register_source("cmp_rolodex", M.source.new())
+
+	vim.api.nvim_create_user_command(
+		"RldxLoad",
+		M.rldx_load_cmd,
+		{ nargs = 0 }
+	)
 
 	-- Register the Add Contact command
 	vim.api.nvim_create_user_command(
