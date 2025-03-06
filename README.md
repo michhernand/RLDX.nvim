@@ -23,8 +23,6 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 - **Save Contact Catalog:** To save the Contact Catalog, use `:RldxSave` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>s</kbd>).
     - *Note: Saving occurs automatically when contacts are saved or deleted. Manually saving is useful if an error occurs with either of those processes.*
 
-
-
 # 📎 Requirements
 - Tested on Neovim 0.10.0.
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
@@ -47,6 +45,7 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
     keys = {
         { "<leader>Xa", "<cmd>RldxAdd<CR>" },
         { "<leader>Xl", "<cmd>RldxLoad<CR>" },
+        { "<leader>Xs", "<cmd>RldxSave<CR>" },
         { "<leader>Xd", "<cmd>RldxDelete<CR>" },
     }
 }
