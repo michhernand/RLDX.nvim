@@ -19,10 +19,10 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 To trigger autocomplete, simply start a word with your `prefix_char` (defaults to `@`).
 
 ## Add to Contact Catalog
-To add a new contact to the autocomplete catalog, invoke `:RldxAdd` (deafults to <kbd>X</kbd> <kbd>a</kbd>).
+To add a new contact to the autocomplete catalog, invoke `:RldxAdd` (deafults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
 
 ## Reload Contact Catalog
-To reload the catalog from its file, invoke `:RldxLoad` (defaults to <kbd>X</kbd> <kbd>l</kbd>).
+To reload the catalog from its file, invoke `:RldxLoad` (defaults to <kbd>leader</kbd> <kbd>X</kbd> <kbd>l</kbd>).
 
 # 📎 Requirements
 - Tested on Neovim 0.10.0.
