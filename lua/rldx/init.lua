@@ -155,7 +155,7 @@ function M.rldx_delete_cmd(opts)
 	)
 
 	if ok == true then
-		vim.notify("RLDX deleted'" .. name .. "' from Catalog")
+		vim.notify("RLDX deleted '" .. name .. "' from Catalog")
 	else
 		vim.notify("RLDX failed to delete contact from Catalog")
 		return
