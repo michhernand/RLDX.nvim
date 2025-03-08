@@ -62,6 +62,8 @@ use {
         setup = function()
         vim.keymap.set("n", "<leader>Xa", "<cmd>RldxAdd<CR>", { noremap = true, silent = true })
         vim.keymap.set("n", "<leader>Xl", "<cmd>RldxLoad<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>Xs", "<cmd>RldxSave<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>Xd", "<cmd>RldxDelete<CR>", { noremap = true, silent = true })
     end
 }
 ```
