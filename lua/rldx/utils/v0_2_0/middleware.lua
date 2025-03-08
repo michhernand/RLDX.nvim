@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 local xor = require("rldx.extras.xor")
 local h = require("rldx.extras.md5")
+local algos = require("rldx.utils.algos")
 
 local M = {}
 
@@ -150,7 +151,12 @@ function M.from_completions(data, opts)
 	end
 
 	for _, entry in ipairs(data) do
-		local hashed_name = "md5::" .. h.sumhexa(entry.label)
+		if opts["hash_salt_len"] == nil then
+			vim.notify("failed to get hash salt length", "error")
+			abort = true
+		end
+		local salt = algos.generate_salt(opts["hash_salt_len"])
+		local hashed_name = "md5::" .. h.sumhexa(entry.label .. salt)
 		if opts["encryption"] == nil then
 			vim.notify(
 				"no RLDX encryption settings were provided",
@@ -175,6 +181,7 @@ function M.from_completions(data, opts)
 
 		contacts[hashed_name] = {
 			name = entry.label,
+			salt = salt,
 			metadata = {
 				encryption = opts.encryption
 			}
@@ -183,10 +190,11 @@ function M.from_completions(data, opts)
  
 	return {
 		header = {
-			rldx_schema = "0.1.0"
+			rldx_schema = "0.2.0"
 		},
 		contacts = contacts,
 	}
 end
 
 return M
+

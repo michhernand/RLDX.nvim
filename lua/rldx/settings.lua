@@ -14,6 +14,7 @@ M.defaults = {
 	highlight_bold = true,
 	schema_ver = "latest",
 	encryption = "plaintext",
+	hash_salt_length = 16,
 }
 
 function M.resolve_opts(options)

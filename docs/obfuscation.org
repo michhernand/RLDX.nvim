@@ -18,6 +18,7 @@ Obfuscation hides contact details using XOR encryption and MD5 hashing.
 {
   "contacts": {
     "md5::a9c78279740ea117100ff82782a974ae": {
+      "salt": "j290Aj0JFi9310J",
       "name": "boba.fett",
       "metadata": {
         "encryption": "plaintext"
@@ -25,7 +26,7 @@ Obfuscation hides contact details using XOR encryption and MD5 hashing.
     }
   },
   "header": {
-    "rldx_schema": "0.1.0"
+    "rldx_schema": "0.2.0"
   }
 }
 #+END_SRC
@@ -35,6 +36,7 @@ Obfuscation hides contact details using XOR encryption and MD5 hashing.
 {
   "contacts": {
     "md5::a9c78279740ea117100ff82782a974ae": {
+      "salt": "jwjvufj39jAjiOAAJ",
       "name": "160A11155A03160000",
       "metadata": {
         "encryption": "elementwise_xor"
@@ -42,7 +44,7 @@ Obfuscation hides contact details using XOR encryption and MD5 hashing.
     }
   },
   "header": {
-    "rldx_schema": "0.1.0"
+    "rldx_schema": "0.2.0"
   }
 }
 #+END_SRC
@@ -51,7 +53,7 @@ Obfuscation hides contact details using XOR encryption and MD5 hashing.
 :PROPERTIES:
 :CUSTOM_ID: setup
 :END:
-*Note* If you are on schema ~v0.0.2~, this will automatically upgrade you to schema ~v0.1.0~.
+*Note* If you are on schema version ~0.0.2~, this will automatically upgrade you to schema version ~>=0.1.0~.
 
 1. Create an encryption key and store it in the ~RLDX_ENCRYPTION_KEY~ environment variable.
 2. Set ~opts.schema_ver~ to ~latest~ and ~opts.encryption~ to ~elementwise_xor~.
@@ -85,7 +87,7 @@ return {
 	2. Update your ~RLDX_ENCRYPTION_KEY~ environment variable.
 	3. Follow the [[#adding_obfuscation][Adding Obfuscation]] steps.
 
-** Downgrading to v0.0.2
+** Downgrading to Version 0.0.2
 	1. Follow the [[#removing_obfuscation][Removing Obfuscation]] steps.
 	2. Set ~opts.schema_ver~ to ~0.0.2~.
 	3. Open Neovim and add a contact using ~:RldxAdd <contact.name>~. RLDX will overwrite the existing catalog with the downgraded version.

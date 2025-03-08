@@ -14,6 +14,15 @@
 _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 ![Demo1](./repo/demo1.gif)
 
+# 🖥️ Usage
+- **Autocomplete:** To trigger autocomplete, simply start a word with your `prefix_char` (defaults to `@`).
+- **Add Contact:** To add a contact to the Contact Catalog, use `:RldxAdd` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>a</kbd>).
+- **Delete Contact:** To delete a contact from the Contact Catalog, use `:RldxDelete` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>d</kbd>).
+- **Reload Contact Catalog:** To reload the Contact Catalog, use `:RldxLoad` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>l</kbd>).
+    - *Note: Loading occurs automatically on startup. Reload is only necessary if the Contact Catalog is updated by a process other than Neovim. In the vast majority of scenarios, this command is not needed.*
+- **Save Contact Catalog:** To save the Contact Catalog, use `:RldxSave` (<kbd>leader</kbd> <kbd>X</kbd> <kbd>s</kbd>).
+    - *Note: Saving occurs automatically when contacts are saved or deleted. Manually saving is useful if an error occurs with either of those processes.*
+
 # 📎 Requirements
 - Tested on Neovim 0.10.0.
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
@@ -32,7 +41,13 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
     dependencies = {
         "hrsh7th/nvim-cmp",
     },
-    opts = {} -- see configuration docs for details
+    opts = {}, -- see configuration docs for details
+    keys = {
+        { "<leader>Xa", "<cmd>RldxAdd<CR>" },
+        { "<leader>Xl", "<cmd>RldxLoad<CR>" },
+        { "<leader>Xs", "<cmd>RldxSave<CR>" },
+        { "<leader>Xd", "<cmd>RldxDelete<CR>" },
+    }
 }
 ```
 
@@ -43,6 +58,12 @@ use {
     requires = { "hrsh7th/nvim-cmp" },
     config = function()
         require("rldx").setup{} -- see configuration docs for details
+    end,
+        setup = function()
+        vim.keymap.set("n", "<leader>Xa", "<cmd>RldxAdd<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>Xl", "<cmd>RldxLoad<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>Xs", "<cmd>RldxSave<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>Xd", "<cmd>RldxDelete<CR>", { noremap = true, silent = true })
     end
 }
 ```
@@ -74,9 +95,11 @@ require('cmp').setup.filetype('org', {
 An optional feature is to add formatting for nvim-cmp to display the type and source of the completion.
 
 _A completion without formatting applied._
+
 ![Completion Without Formatting](./repo/Completion_Without_Formatting.png)
 
 _A completion with formatting applied._
+
 ![Completion With Formatting](./repo/Completion_With_Formatting.png)
 
 This is enabled by setting `formatting` in the `config` function for `hrsh7th/nvim-cmp`.
@@ -132,12 +155,15 @@ opts = {
 `highlight_bold` (bool) is a flag indicating whether highlighted names should be bolded.
 
 ## Schema Version
-`schema_ver` (string) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2' or '0.1.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest schema.
+`schema_ver` (str) tells RLDX what version of the schmea to use when writing out data. Options include '0.0.2', '0.1.0', or '0.2.0'. 'latest' (which is the default) is also an option which automatically upgrades your catalog to the latest schema.
 
 ## Obfuscation
-`encryption` (str) is the chosen encryption methodology. Options include:
-- `plaintext`: No encryption of fields.
-- `elementwise_xor` (only available for `schema_ver >= '0.1.0'`): xor encryption of each contact.
+### Encryption
+- `encryption` (str) is the chosen encryption methodology. Options include:
+    - `plaintext`: No encryption of fields.
+    - `elementwise_xor` (only available for `schema_ver >= '0.1.0'`): xor encryption of each contact.
+### Hash Salt Length
+`hash_salt_length` (str) is the number of random salt characters added to the hash.
 
 For more information about Obfuscation, see the [Obfuscation Doc](./docs/obfuscation.org)
 
@@ -160,12 +186,14 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 
 # 🚘 Roadmap
 - [X] ~~Obfuscation~~
-- [ ] Form for adding contacts
-- [ ] Allow saving all contacts
-- [ ] Allow loading all contacts
-- [ ] Allow deleting contacts
-- [ ] Allow updating contacts
-- [ ] Allow showing of contact details
+- [X] ~~Salt for Hashing~~
+- [X] ~~Form for adding contacts~~
+- [X] ~~Allow saving all contacts~~
+- [X] ~~Allow loading all contacts~~
+- [X] ~~Allow deleting contacts~~
+- [ ] Option to save catalog as BSON
+- [ ] Store contact key-value metadata
+- [ ] Display contact key-value metadata
 - [ ] Blink.nvim compatability
 - [ ] Grep files by contact name
 
@@ -180,5 +208,5 @@ This appears to happen when a new org-roam file is created via org-roam-capture.
 - Only highlighting is affected here. Other functionality is unaffected.
 
 # 🏆 Acknowledgements
-- md5.lua is provided by [md5](https://github.com/kikito/md5.lua)
-- xor.lua is provided by [xor](https://github.com/Braayy/xor-lua)
+- md5.lua is provided by [md5](https://github.com/kikito/md5.lua) (by [kikito](https://github.com/kikito))
+- xor.lua is provided by [xor](https://github.com/Braayy/xor-lua) (by [Braayy](https://github.com/Braayy/xor-lua))
