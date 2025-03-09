@@ -10,7 +10,7 @@ local load = {}
 function load.from_hex(value, opts, abort)
 	if value["metadata"] == nil then
 		vim.notify(
-			"RLDX contact " .. name .. "has no encryption settings", 
+			"RLDX contact " .. name .. " has no encryption settings", 
 			"error"
 		)
 		return value, opts, true
@@ -29,7 +29,7 @@ end
 function load.decrypt(value, opts, abort)
 	if value["metadata"] == nil then
 		vim.notify(
-			"RLDX contact " .. name .. "has no encryption settings", 
+			"RLDX contact " .. name .. " has no encryption settings", 
 			"error"
 		)
 		return value, opts, true
