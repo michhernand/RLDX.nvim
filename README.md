@@ -191,7 +191,6 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 - [X] ~~Allow saving all contacts~~
 - [X] ~~Allow loading all contacts~~
 - [X] ~~Allow deleting contacts~~
-- [ ] Option to save catalog as BSON
 - [ ] Store contact key-value metadata
 - [ ] Display contact key-value metadata
 - [ ] Blink.nvim compatability

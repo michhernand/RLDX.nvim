@@ -1,0 +1,27 @@
+{
+	"header": {
+		"rldx_schema": "0.3.0"
+	},
+	"contacts": {
+		"md5::21390d7a16b1e65ec9a9d30d220fd683": {
+			"name": "04101a11171343130911061c1514081b",
+			"salt": "farewellturn",
+			"metadata": {
+				"encryption": "elementwise_xor"
+			},
+			"properties": "U2FsdGVkX1+9UG2rllMfKgg1TtEMn8fTIsttPOB++penV9/90FRcsd34g3HvbUhBGncnYvTHscYfBpV095yvWLC9PgcBQ8mudaLIj8aKcVCtfmwgISf6T/xlqBZRtM29NP9G0rSpViTtH0sDNxkKum8N4rImHesErnMr23Vmsl3X/Nk/MDHp0hOmZB1wSExB"
+		},
+		"md5::8814725c759865549d62d666c9ad2e87": {
+			"name": "hermes.conrad",
+			"salt": "cabinetcold",
+			"metadata": {
+				"encryption": "plaintext"
+			},
+			"properties": {
+				"employee_id": 123456,
+				"email": "hermes.conrad@planetexpress.com"
+			}
+		}
+	}
+}
+
