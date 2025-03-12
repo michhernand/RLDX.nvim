@@ -172,7 +172,7 @@ function save.encrypt(entry, opts, abort)
 	if entry.properties ~= nil then
 		entry.properties = xor(vim.fn.json_encode(entry.properties), opts.key)
 	else
-		entry.properties = {}
+		entry.properties = nil
 	end
 
 	return entry, opts, abort
