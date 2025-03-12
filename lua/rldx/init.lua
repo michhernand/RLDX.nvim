@@ -232,14 +232,7 @@ function M.rldx_delete_cmd(opts)
 		return
 	end
 
-	local filtered_contacts = {}
-	for _, contact in ipairs(M.contacts) do
-		if contact.label ~= name then
-			table.insert(filtered_contacts, contact)
-		end
-	end
-	M.contacts = filtered_contacts
-
+	M.contacts = sh.filter_out(name, M.contacts)
 
 	enc_opts = {
 		encryption = sett.options.encryption,
