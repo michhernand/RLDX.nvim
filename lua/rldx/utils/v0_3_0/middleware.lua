@@ -72,7 +72,6 @@ function load.decrypt(value, opts, abort)
 	else
 		value.properties = {}
 	end
-	vim.notify(vim.inspect(value))
 
 	return value, opts, abort
 end
