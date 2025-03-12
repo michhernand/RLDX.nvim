@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 local sett = require("rldx.settings")
+local sh = require("rldx.shared")
 local crud = require("rldx.utils.crud")
 local algos = require("rldx.utils.algos")
 
@@ -57,15 +58,9 @@ function M.close_and_process()
 	end
 
 	content = vim.fn.json_decode(content)
+	local j, _ = sh.lookup(M.temp_name, M.contacts)
 
-	local j
-	for i, contact in ipairs(M.contacts) do
-		if contact.label == M.temp_name then
-			j = i
-		end
-	end
-
-	if j == nil then
+	if j < 0 then
 		vim.notify("RLDX failed to update properties for '" .. M.temp_name .. "'", "error")
 		return
 	end
