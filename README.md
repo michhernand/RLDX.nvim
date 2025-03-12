@@ -191,8 +191,9 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
 - [X] ~~Allow saving all contacts~~
 - [X] ~~Allow loading all contacts~~
 - [X] ~~Allow deleting contacts~~
-- [ ] Store contact key-value metadata
+- [X] Store contact key-value metadata
 - [ ] Display contact key-value metadata
+- [ ] Filter by contact key-value metadata
 - [ ] Blink.nvim compatability
 - [ ] Grep files by contact name
 
