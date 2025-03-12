@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 local sett = require("rldx.settings")
+local sh = require("rldx.shared")
 local crud = require("rldx.utils.crud")
 local algos = require("rldx.utils.algos")
 
@@ -9,9 +10,83 @@ function M.reset()
 	require("rldx").setup()
 end
 
-M.VERSION = "0.2.0"
+M.VERSION = "0.3.0"
 
 M.contacts = {}
+
+-- Open and edit JSON in a temporary buffer.
+function M.open_temp_buffer(contact)
+	local buf = vim.api.nvim_create_buf(false, true)
+	for option, value in pairs(sett.options.temporary_buffer_options) do
+		vim.api.nvim_buf_set_option(buf, option, value)
+	end
+
+	local lines = vim.split(vim.fn.json_encode(contact.properties), "\n")
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+	vim.cmd("split")
+	vim.api.nvim_win_set_buf(0, buf)
+
+	M.temp_buf = buf
+	M.temp_name = contact.label
+
+	vim.api.nvim_buf_set_keymap(buf, "n", "<C-c>", "", {
+		callback = function() M.close_and_process() end,
+		noremap = true,
+		silent = true
+	})
+
+	vim.api.nvim_buf_set_keymap(buf, "i", "<C-c>", "", {
+		callback = function() M.close_and_process() end,
+		noremap = true,
+		silent = true
+	})
+
+	vim.cmd("normal! i")
+end
+
+-- Close and save a temporary buffer.
+function M.close_and_process()
+	local content = table.concat(
+	vim.api.nvim_buf_get_lines(M.temp_buf, 0, -1, false),
+	"\n"
+	)
+
+	local win_id = vim.fn.bufwinid(M.temp_buf)
+	if win_id ~= -1 then
+		vim.api.nvim_win_close(win_id, true)
+	end
+
+	content = vim.fn.json_decode(content)
+	local j, _ = sh.lookup(M.temp_name, M.contacts)
+
+	if j < 0 then
+		vim.notify("RLDX failed to update properties for '" .. M.temp_name .. "'", "error")
+		return
+	end
+
+	M.contacts[j].properties = content
+
+	enc_opts = {
+		encryption = sett.options.encryption,
+		key = sett.session.encryption_key,
+		hash_salt_len = sett.options.hash_salt_length,
+	}
+
+	ok, err = crud.save_contacts(
+		sett.options.filename,
+		algos.copy_table(M.contacts),
+		sett.options.schema_ver,
+		enc_opts
+	)
+
+	if ok == true then
+		vim.notify("RLDX updated properties for '" .. M.temp_name .. "'")
+	else
+		vim.notify("RLDX failed to update properties")
+		return
+	end
+end
 
 function M.getPath(str)
 	return str:match("(.*[/\\])")
@@ -112,6 +187,12 @@ function M.setup(options)
 		M.rldx_list_cmd,
 		{ nargs = 0 }
 	)
+
+	vim.api.nvim_create_user_command(
+		"RldxProps",
+		M.rldx_edit_props_cmd,
+		{ nargs = 0 }
+	)
 end
 
 -- ########################################################
@@ -120,6 +201,25 @@ end
 -- List catalog (for debug)
 function M.rldx_list_cmd(opts)
 	vim.notify(vim.inspect(M.contacts))
+end
+
+function M.rldx_edit_props_cmd(opts)
+	local name = vim.fn.input('[PROPS] Enter Name: ')
+	vim.cmd('redraw')
+	vim.cmd('echo ""')
+
+	if name == nil or name == "" then
+		vim.notify("RLDX tried to edit props for an invalid name", "error")
+		return
+	end
+
+	local _, chosen_contact = sh.lookup(name, M.contacts)
+	if chosen_contact == nil then
+		vim.notify("RLDX tried to edit props for a non-existant contact", "error")
+		return
+	end
+
+	M.open_temp_buffer(chosen_contact)
 end
 
 function M.rldx_delete_cmd(opts)
@@ -132,14 +232,7 @@ function M.rldx_delete_cmd(opts)
 		return
 	end
 
-	local filtered_contacts = {}
-	for _, contact in ipairs(M.contacts) do
-		if contact.label ~= name then
-			table.insert(filtered_contacts, contact)
-		end
-	end
-	M.contacts = filtered_contacts
-
+	M.contacts = sh.filter_out(name, M.contacts)
 
 	enc_opts = {
 		encryption = sett.options.encryption,
