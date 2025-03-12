@@ -213,14 +213,7 @@ function M.rldx_edit_props_cmd(opts)
 		return
 	end
 
-	local chosen_contact
-	for _, contact in ipairs(M.contacts) do
-		if contact.label == name then
-			chosen_contact = contact
-			break
-		end
-	end
-
+	local _, chosen_contact = sh.lookup(name, M.contacts)
 	if chosen_contact == nil then
 		vim.notify("RLDX tried to edit props for a non-existant contact", "error")
 		return
