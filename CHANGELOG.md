@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.0 - Metadata Release
+### Features
+- Added ability to store arbitrary key-value metadata for each contact.
+
 ## v0.2.0 - CRUD Release
 ### Features
 - Added RldxDelete, a command that deletes a contact by name.
