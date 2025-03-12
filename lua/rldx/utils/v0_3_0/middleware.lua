@@ -7,6 +7,21 @@ local M = {}
 
 local load = {}
 
+function decode_hex_apply(cc)
+	return string.char(tonumber(cc, 16))
+end
+
+function encode_hex_apply(c)
+	return string.format("%02X", string.byte(c))
+end
+
+function is_empty(tab)
+	if next(tab) == nil then
+		return true
+	end
+	return false
+end
+
 function load.from_hex(value, opts, abort)
 	if value["metadata"] == nil then
 		vim.notify(
@@ -20,12 +35,11 @@ function load.from_hex(value, opts, abort)
 		return value, opts, abort
 	end
 
-	value.name = (value.name:gsub("..", function(cc)
-		return string.char(tonumber(cc, 16))
-	end))
-
+	value.name = (value.name:gsub("..", decode_hex_apply))
 	if value.properties ~= nil then
-		value.properties = xor(value.properties, opts.key)
+		value.properties = (value.properties:gsub("..", decode_hex_apply))
+	else
+		value.properties = ""
 	end
 	return value, opts, abort
 end
@@ -53,9 +67,7 @@ function load.decrypt(value, opts, abort)
 	end
 
 	value.name = xor(value.name, opts.key)
-
 	if value.properties ~= nil then
-		vim.notify(xor(value.properties, opts.key))
 		value.properties = vim.fn.json_decode(xor(value.properties, opts.key))
 	else
 		value.properties = {}
@@ -126,14 +138,11 @@ function save.to_hex(entry, opts, abort)
 		return entry, opts, abort
 	end
 
-	entry.label = (entry.label:gsub(".", function(c)
-		return string.format("%02X", string.byte(c))
-	end))
-
+	entry.label = (entry.label:gsub(".", encode_hex_apply))
 	if entry.properties ~= nil then
-		entry.properties = (entry.properties:gsub(".", function(c)
-			return string.format("%02X", string.byte(c))
-		end))
+		entry.properties = (entry.properties:gsub(".", encode_hex_apply))
+	else
+		entry.properties = {}
 	end
 
 	return entry, opts, abort
@@ -160,11 +169,11 @@ function save.encrypt(entry, opts, abort)
 		return entry, opts, true
 	end
 
-
 	entry.label = xor(entry.label, opts.key)
-
 	if entry.properties ~= nil then
 		entry.properties = xor(vim.fn.json_encode(entry.properties), opts.key)
+	else
+		entry.properties = {}
 	end
 
 	return entry, opts, abort
