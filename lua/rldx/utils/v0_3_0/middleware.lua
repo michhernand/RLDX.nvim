@@ -7,25 +7,18 @@ local M = {}
 
 local load = {}
 
-function decode_hex_apply(cc)
+local function decode_hex_apply(cc)
 	return string.char(tonumber(cc, 16))
 end
 
-function encode_hex_apply(c)
+local function encode_hex_apply(c)
 	return string.format("%02X", string.byte(c))
-end
-
-function is_empty(tab)
-	if next(tab) == nil then
-		return true
-	end
-	return false
 end
 
 function load.from_hex(value, opts, abort)
 	if value["metadata"] == nil then
 		vim.notify(
-			"RLDX contact " .. name .. " has no encryption settings", 
+			"RLDX contact " .. value.name .. " has no encryption settings",
 			"error"
 		)
 		return value, opts, true
@@ -47,7 +40,7 @@ end
 function load.decrypt(value, opts, abort)
 	if value["metadata"] == nil then
 		vim.notify(
-			"RLDX contact " .. name .. " has no encryption settings", 
+			"RLDX contact " .. value.name .. " has no encryption settings",
 			"error"
 		)
 		return value, opts, true
@@ -92,7 +85,7 @@ function M.to_completions(data, opts)
 		abort = true
 	end
 
-	for name, value in pairs(data.contacts) do
+	for _, value in pairs(data.contacts) do
 		if abort == false then
 			value, opts, abort = load.from_hex(value, opts, false)
 		end
