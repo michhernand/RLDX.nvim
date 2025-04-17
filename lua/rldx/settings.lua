@@ -15,6 +15,13 @@ M.defaults = {
 	schema_ver = "latest",
 	encryption = "plaintext",
 	hash_salt_length = 16,
+	temporary_buffer_options = {
+		buftype = "nofile",
+		bufhidden = "hide",
+		swapfile = false,
+		filetype = "json",
+		modifiable = true
+	}
 }
 
 function M.resolve_opts(options)
