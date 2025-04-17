@@ -15,7 +15,6 @@ M.defaults = {
 	schema_ver = "latest",
 	encryption = "plaintext",
 	hash_salt_length = 16,
-
 	temporary_buffer_options = {
 		buftype = "nofile",
 		bufhidden = "hide",
