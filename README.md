@@ -47,6 +47,7 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
         { "<leader>Xl", "<cmd>RldxLoad<CR>" },
         { "<leader>Xs", "<cmd>RldxSave<CR>" },
         { "<leader>Xd", "<cmd>RldxDelete<CR>" },
+        { "<leader>Xp", "<cmd>RldxProps<CR>" },
     }
 }
 ```
@@ -64,6 +65,7 @@ use {
         vim.keymap.set("n", "<leader>Xl", "<cmd>RldxLoad<CR>", { noremap = true, silent = true })
         vim.keymap.set("n", "<leader>Xs", "<cmd>RldxSave<CR>", { noremap = true, silent = true })
         vim.keymap.set("n", "<leader>Xd", "<cmd>RldxDelete<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>Xp", "<cmd>RldxProps<CR>", { noremap = true, silent = true})
     end
 }
 ```
@@ -183,6 +185,9 @@ _Left: Neovim Editor, Right: At-Rest Obfuscated Catalog_
     - **Very** light encryption of names.
     - Hashing of names to guarantee uniqueness.
 - To enable obfuscation, see the instructions in [Obfusfaction Doc](./docs/obfuscation.org)
+
+## Adding Properties
+Arbitrary JSON key-value data can be assigned to any contact using `:RldxProps`. Arbitrary JSON is obfuscated (when obfuscation is enabled).
 
 # 🚘 Roadmap
 - [X] ~~Obfuscation~~
