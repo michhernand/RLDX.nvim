@@ -4,6 +4,12 @@ local sh = require("rldx.shared")
 local crud = require("rldx.utils.crud")
 local algos = require("rldx.utils.algos")
 
+local pickers = require("telescope.pickers")
+local previewers = require("telescope.previewers")
+local finders = require("telescope.finders")
+local conf = require("telescope.config").values
+local telescope = require("telescope")
+
 local M = {}
 
 function M.reset()
@@ -45,6 +51,34 @@ function M.open_temp_buffer(contact)
 	vim.cmd("normal! i")
 end
 
+
+function M.find_contacts()
+	pickers.new({}, {
+		prompt_title = "RLDX Contacts",
+		finder = finders.new_table {
+			results = M.contacts,
+			entry_maker = function(entry)
+				return {
+					value = entry,
+					display = entry.label,
+					ordinal = entry.label,
+				}
+			end,
+		},
+		sorter = conf.generic_sorter(M.contacts),
+		previewer = previewers.new_buffer_previewer({
+			define_preview = function(self, entry, status)
+				-- Get the JSON string of properties
+				local json_str = vim.fn.json_encode(entry.value.properties)
+
+				-- Set the buffer content to the JSON string
+				vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, {json_str})
+			end
+		}),
+	}):find()
+end
+
+
 -- Close and save a temporary buffer.
 function M.close_and_process()
 	local content = table.concat(
@@ -67,13 +101,13 @@ function M.close_and_process()
 
 	M.contacts[j].properties = content
 
-	enc_opts = {
+	local enc_opts = {
 		encryption = sett.options.encryption,
 		key = sett.session.encryption_key,
 		hash_salt_len = sett.options.hash_salt_length,
 	}
 
-	ok, err = crud.save_contacts(
+	local ok, err = crud.save_contacts(
 		sett.options.filename,
 		algos.copy_table(M.contacts),
 		sett.options.schema_ver,
@@ -153,6 +187,15 @@ function M.setup(options)
 		end
 	end
 	M.rldx_load_cmd()
+
+	telescope.register_extension({
+		exports = { M.find_contacts }
+	})
+	vim.api.nvim_create_user_command(
+		"RldxFind",
+		M.find_contacts,
+		{ nargs = 0 }
+	)
 
 	-- Register the Source with nvim-cmp
 	cmp.register_source("cmp_rolodex", M.source.new())
