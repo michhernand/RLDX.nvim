@@ -1,0 +1,39 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/michhernand/rldx",
+	"title": "RLDX v0.4.0",
+	"description": "v0.4.0 of the RLDX Catalog",
+	"type": "object",
+
+	"properties": {
+		"header": {
+			"type": "object",
+			"properties": {
+				"rldx_schema": {
+					"type": "string"
+				}
+			}
+		},
+		"contacts": {
+			"type": "object",
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"name": { "type": "string" },
+					"organization": { "type": ["string", "null"] },
+					"salt": { "type": "string" },
+					"is_default": { "type": ["bool", "null"] },
+					"metadata": {
+						"type": "object",
+						"properties": {
+							"encryption": { "type": "string" }
+						}
+					},
+					"properties": { "type": "object" }
+				}
+			}
+		}
+	}
+}
+
+
