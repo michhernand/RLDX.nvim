@@ -5,6 +5,7 @@ local v0_0_2_mw = require("rldx.utils.v0_0_2.middleware")
 local v0_1_0_mw = require("rldx.utils.v0_1_0.middleware")
 local v0_2_0_mw = require("rldx.utils.v0_2_0.middleware")
 local v0_3_0_mw = require("rldx.utils.v0_3_0.middleware")
+local v0_4_0_mw = require("rldx.utils.v0_4_0.middleware")
 
 local M = {}
 
@@ -15,8 +16,10 @@ function M.save_contacts(filepath, catalog, ver, opts)
 		catalog = v0_1_0_mw.from_completions(catalog, opts)
 	elseif (ver == "0.2.0") then
 		catalog = v0_2_0_mw.from_completions(catalog, opts)
-	elseif (ver == "0.3.0") or (ver == "latest") then
+	elseif (ver == "0.3.0") then
 		catalog = v0_3_0_mw.from_completions(catalog, opts)
+	elseif (ver == "0.4.0") or (ver == "latest") then
+		catalog = v0_4_0_mw.from_completions(catalog, opts)
 	elseif ver == nil then
 		vim.notify("invlaid schema version: nil", "error")
 		return false
@@ -63,8 +66,10 @@ function M.load_contacts(filepath, create, opts)
 		catalog = v0_1_0_mw.to_completions(catalog, opts)
 	elseif ver == "0.2.0" then
 		catalog = v0_2_0_mw.to_completions(catalog, opts)
-	elseif ver == "0.3.0" or (ver == "latest") then
+	elseif ver == "0.3.0" then
 		catalog = v0_3_0_mw.to_completions(catalog, opts)
+	elseif ver == "0.4.0" or (ver == "latest") then
+		catalog = v0_4_0_mw.to_completions(catalog, opts)
 	elseif ver == nil then
 		vim.notify("invlaid schema version: nil", "error")
 		return {}
