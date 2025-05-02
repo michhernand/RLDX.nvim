@@ -92,10 +92,15 @@ function M.getPath(str)
 	return str:match("(.*[/\\])")
 end
 
-function M.setup_highlight(color, bold)
-	vim.api.nvim_set_hl(0, "RolodexHighlight", { 
-		fg = color, 
-		bold = bold, 
+function M.setup_highlight(color, bold, org_color, org_bold)
+	vim.api.nvim_set_hl(0, "RolodexHighlight", {
+		fg = color,
+		bold = bold,
+	})
+
+	vim.api.nvim_set_hl(0, "RolodexOrgHighlight", {
+		fg = org_color,
+		bold = org_bold,
 	})
 
 	vim.api.nvim_create_autocmd({ "BufEnter" }, {
@@ -103,7 +108,9 @@ function M.setup_highlight(color, bold)
 		callback = function()
 			vim.cmd [[
 			syntax match RolodexPattern /\v\@\w+\.\w+/
+			syntax match RolodexOrgPattern /\v\@\[\w+]\w+\.\w+/
 			highlight link RolodexPattern RolodexHighlight
+			highlight link RolodexOrgPattern RolodexOrgHighlight
 			]]
 		end,
 	})
@@ -131,7 +138,9 @@ function M.setup(options)
 	if sett.options.highlight_enabled == true then
 		M.setup_highlight(
 			sett.options.highlight_color,
-			sett.options.highlight_bold
+			sett.options.highlight_bold,
+			sett.options.external_highlight_color,
+			sett.options.external_highlight_bold
 		)
 	end
 
