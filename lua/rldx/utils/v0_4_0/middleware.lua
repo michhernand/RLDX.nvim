@@ -35,7 +35,7 @@ function load.from_hex(value, opts, abort)
 		value.properties = ""
 	end
 
-	if value.organization ~= nil then
+	if value.organization ~= nil and value.properties ~= "" then
 		value.organization = (value.organization:gsub("..", decode_hex_apply))
 	else
 		value.organization = ""
@@ -66,7 +66,7 @@ function load.decrypt(value, opts, abort)
 	end
 
 	value.name = xor(value.name, opts.key)
-	if value.properties ~= nil then
+	if value.properties ~= nil and value.properties ~= "" then
 		value.properties = vim.fn.json_decode(xor(value.properties, opts.key))
 	else
 		value.properties = {}
@@ -150,7 +150,7 @@ function save.to_hex(entry, opts, abort)
 	end
 
 	entry.label = (entry.label:gsub(".", encode_hex_apply))
-	if entry.properties ~= nil then
+	if entry.properties ~= nil and #entry.properties > 0 then
 		entry.properties = (entry.properties:gsub(".", encode_hex_apply))
 	else
 		entry.properties = {}
