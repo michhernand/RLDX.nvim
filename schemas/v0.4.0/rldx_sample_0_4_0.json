@@ -24,23 +24,6 @@
 				"email": "hermes.conrad@planetexpress.com"
 			}
 		}
-	},
-	"organizations": {
-		"md5 hash": {
-			"name": "enc_name",
-			"salt": "cabinetcold",
-			"is_default": true,
-			"metadata": {
-				"encryption": "elementwise_xor"
-			}
-		},
-		"md5 hash again": {
-			"name": "plaintext name",
-			"salt": "cabinetcold",
-			"metadata": {
-				"encryption": "plaintext"
-			}
-		}
 	}
 }
 
