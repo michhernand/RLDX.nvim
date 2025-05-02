@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.0 - Organizations Release
+- Added ability to add organizations.
+- Each contact can have an organization associated with them.
+
 ## v0.3.0 - Metadata Release
 ### Features
 - Added ability to store arbitrary key-value metadata for each contact.
