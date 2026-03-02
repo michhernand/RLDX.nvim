@@ -2,6 +2,9 @@
 
 ![Logo](./repo/logo.png)
 
+# 🚨 Repository Moved!
+This repository has been moved to Codeberg. Check it out [here](https://codeberg.org/hernandez/RLDX.nvim)
+
 **Experience an Issue?**
 1. Review the [Known Issues](#known-issues) to find a workaround.
 2. If the issue is new then create a [Github issue](https://github.com/michhernand/RLDX.nvim/issues).
